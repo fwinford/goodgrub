@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BrandSupportEmail</key>
+	<string>goodgrubsupport@gmail.com</string>
+	<key>CFBundleDisplayName</key>
+	<string>GoodGrub</string>
+	<key>CommonPlateProductionAPIBaseURL</key>
+	<string>$(COMMONPLATE_PRODUCTION_API_BASE_URL)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>comgooglemaps</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fraunces-Variable.ttf</string>
+	</array>
+</dict>
+</plist>

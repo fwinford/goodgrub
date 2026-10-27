@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C0A1F032FFB0001008E06A4 /* ScreenshotQualificationFingerprint.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0A1F022FFB0001008E06A4 /* ScreenshotQualificationFingerprint.generated.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A1B2C3072FFAE669008E06A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCF2C8FA2FFAE669008E06A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCF2C9012FFAE669008E06A4;
+			remoteInfo = CommonPlateios;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5C0A1F022FFB0001008E06A4 /* ScreenshotQualificationFingerprint.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotQualificationFingerprint.generated.swift; sourceTree = DERIVED_FILE_DIR; };
+		A1B2C3012FFAE669008E06A4 /* CommonPlateiosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommonPlateiosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCF2C9022FFAE669008E06A4 /* CommonPlateios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommonPlateios.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A1B2C3102FFAE669008E06A4 /* Exceptions for "CommonPlateios" folder in "CommonPlateios" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = DCF2C9012FFAE669008E06A4 /* CommonPlateios */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A1B2C3022FFAE669008E06A4 /* CommonPlateiosTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CommonPlateiosTests;
+			sourceTree = "<group>";
+		};
+		DCF2C9042FFAE669008E06A4 /* CommonPlateios */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A1B2C3102FFAE669008E06A4 /* Exceptions for "CommonPlateios" folder in "CommonPlateios" target */,
+			);
+			path = CommonPlateios;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1B2C3052FFAE669008E06A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCF2C8FF2FFAE669008E06A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C0A1F042FFB0001008E06A4 /* Derived */ = {
+			isa = PBXGroup;
+			children = (
+				5C0A1F022FFB0001008E06A4 /* ScreenshotQualificationFingerprint.generated.swift */,
+			);
+			name = Derived;
+			sourceTree = "<group>";
+		};
+		DCF2C8F92FFAE669008E06A4 = {
+			isa = PBXGroup;
+			children = (
+				DCF2C9042FFAE669008E06A4 /* CommonPlateios */,
+				A1B2C3022FFAE669008E06A4 /* CommonPlateiosTests */,
+				5C0A1F042FFB0001008E06A4 /* Derived */,
+				DCF2C9032FFAE669008E06A4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DCF2C9032FFAE669008E06A4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCF2C9022FFAE669008E06A4 /* CommonPlateios.app */,
+				A1B2C3012FFAE669008E06A4 /* CommonPlateiosTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1B2C3032FFAE669008E06A4 /* CommonPlateiosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1B2C30B2FFAE669008E06A4 /* Build configuration list for PBXNativeTarget "CommonPlateiosTests" */;
+			buildPhases = (
+				A1B2C3042FFAE669008E06A4 /* Sources */,
+				A1B2C3052FFAE669008E06A4 /* Frameworks */,
+				A1B2C3062FFAE669008E06A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1B2C3082FFAE669008E06A4 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A1B2C3022FFAE669008E06A4 /* CommonPlateiosTests */,
+			);
+			name = CommonPlateiosTests;
+			packageProductDependencies = (
+			);
+			productName = CommonPlateiosTests;
+			productReference = A1B2C3012FFAE669008E06A4 /* CommonPlateiosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DCF2C9012FFAE669008E06A4 /* CommonPlateios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCF2C90D2FFAE66A008E06A4 /* Build configuration list for PBXNativeTarget "CommonPlateios" */;
+			buildPhases = (
+				5C0A1F012FFB0001008E06A4 /* Derive Screenshot Qualification Fingerprint */,
+				DCF2C8FE2FFAE669008E06A4 /* Sources */,
+				DCF2C8FF2FFAE669008E06A4 /* Frameworks */,
+				DCF2C9002FFAE669008E06A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				DCF2C9042FFAE669008E06A4 /* CommonPlateios */,
+			);
+			name = CommonPlateios;
+			packageProductDependencies = (
+			);
+			productName = CommonPlateios;
+			productReference = DCF2C9022FFAE669008E06A4 /* CommonPlateios.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DCF2C8FA2FFAE669008E06A4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					A1B2C3032FFAE669008E06A4 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = DCF2C9012FFAE669008E06A4;
+					};
+					DCF2C9012FFAE669008E06A4 = {
+						CreatedOnToolsVersion = 26.6;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = DCF2C8FD2FFAE669008E06A4 /* Build configuration list for PBXProject "CommonPlateios" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DCF2C8F92FFAE669008E06A4;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = DCF2C9032FFAE669008E06A4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DCF2C9012FFAE669008E06A4 /* CommonPlateios */,
+				A1B2C3032FFAE669008E06A4 /* CommonPlateiosTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1B2C3062FFAE669008E06A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCF2C9002FFAE669008E06A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5C0A1F012FFB0001008E06A4 /* Derive Screenshot Qualification Fingerprint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/CommonPlateios/Services/ScreenshotAssistance",
+				"$(SRCROOT)/CommonPlateios/Services/ScreenshotImageNormalizer.swift",
+				"$(SRCROOT)/CommonPlateios/Services/ScreenshotLocalTextRecognizer.swift",
+				"$(SRCROOT)/CommonPlateios/Models/SupportedVendorCatalog.swift",
+				"$(SRCROOT)/CommonPlateios/Models/ScreenshotProposal.swift",
+				"$(SRCROOT)/CommonPlateios/Models/CommonPlateModels.swift",
+				"$(SRCROOT)/../../shared/vendors.json",
+			);
+			name = "Derive Screenshot Qualification Fingerprint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/ScreenshotQualificationFingerprint.generated.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# W4-S3 D2: derive the screenshot-qualification implementation fingerprint.\n#\n# Hashes every declared input (this phase's Input Files: a file, or a directory\n# expanded recursively to all of its regular files) so ANY change to the\n# qualification-relevant implementation yields a different fingerprint with no\n# human step, and a NEW file under a declared directory participates without\n# anyone registering it. The listing is one \"<sha256 of file>  <path relative to\n# the repository root>\" line per file, sorted bytewise by path and de-duplicated,\n# under a fixed version header; the fingerprint is the SHA-256 of that listing.\n# A path is an OPAQUE byte string end to end: it travels NUL-terminated through\n# enumeration, sorting and de-duplication, so spaces and tabs in a name can never\n# split, merge, or drop an entry (a name containing a newline is rejected: it\n# could forge a second listing line). The same source tree gives the same value\n# in Debug and Release. A missing or unreadable input fails the build.\n# (User-script sandboxing is off for this target: with it on, Xcode lets a\n# script list a declared directory but not read the files inside it.)\nset -euo pipefail\nexport LC_ALL=C\nout=\"${SCRIPT_OUTPUT_FILE_0}\"\nrepo=\"$(cd \"${SRCROOT}/../..\" && pwd -P)\"\ncount=\"${SCRIPT_INPUT_FILE_COUNT}\"\nif [ \"${count}\" -lt 1 ]; then\n  echo \"error: screenshot qualification fingerprint has no declared inputs\" >&2\n  exit 1\nfi\n\n# Prints one file's canonical repository-relative path, NUL-terminated.\nemit_relative_path() {\n  local file=\"$1\" dir\n  case \"${file}\" in\n    *$'\\n'*)\n      echo \"error: screenshot qualification fingerprint input path contains a newline: ${file}\" >&2\n      return 1\n      ;;\n  esac\n  dir=\"$(cd \"$(dirname -- \"${file}\")\" && pwd -P)\" || return 1\n  printf '%s\\0' \"${dir#\"${repo}\"/}/$(basename -- \"${file}\")\"\n}\n\n# Prints, NUL-terminated, every regular file every declared input denotes.\nemit_all_paths() {\n  local i=0 input file\n  while [ \"${i}\" -lt \"${count}\" ]; do\n    eval \"input=\\${SCRIPT_INPUT_FILE_${i}}\"\n    i=$((i + 1))\n    case \"${input}\" in\n      \"${TARGET_TEMP_DIR}\"/*)\n        # Xcode appends this phase's own generated script as an input; it is\n        # not a declared qualification input.\n        continue\n        ;;\n    esac\n    if [ -d \"${input}\" ]; then\n      if [ \"$(find \"${input}\" -type f ! -name .DS_Store -print0 | tr -cd '\\0' | wc -c | tr -d ' ')\" -eq 0 ]; then\n        echo \"error: screenshot qualification fingerprint input directory has no files: ${input}\" >&2\n        return 1\n      fi\n      find \"${input}\" -type f ! -name .DS_Store -print0 | while IFS= read -r -d '' file; do\n        emit_relative_path \"${file}\" || exit 1\n      done || return 1\n    elif [ -f \"${input}\" ]; then\n      emit_relative_path \"${input}\" || return 1\n    else\n      echo \"error: screenshot qualification fingerprint input is missing: ${input}\" >&2\n      return 1\n    fi\n  done\n}\n\nlisting=\"$(emit_all_paths | sort -z -u | while IFS= read -r -d '' rel; do\n  digest=\"$(shasum -a 256 < \"${repo}/${rel}\")\" || { echo \"error: screenshot qualification fingerprint input is unreadable: ${rel}\" >&2; exit 1; }\n  printf '%s  %s\\n' \"${digest%% *}\" \"${rel}\"\ndone)\"\nif [ -z \"${listing}\" ]; then\n  echo \"error: screenshot qualification fingerprint hashed no files\" >&2\n  exit 1\nfi\nfingerprint=\"$(printf 'screenshot-qualification-fingerprint-v1\\n%s\\n' \"${listing}\" | shasum -a 256)\"\nfingerprint=\"${fingerprint%% *}\"\ncontent=\"// Generated by the \\\"Derive Screenshot Qualification Fingerprint\\\" build phase. Do not edit.\n// SHA-256 over the declared qualification-relevant source inputs; see ScreenshotQualification.swift.\nenum ScreenshotQualificationFingerprint {\n    nonisolated static let current = \\\"${fingerprint}\\\"\n}\"\nif [ -f \"${out}\" ] && [ \"$(cat \"${out}\")\" = \"${content}\" ]; then\n  exit 0\nfi\nprintf '%s\\n' \"${content}\" > \"${out}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1B2C3042FFAE669008E06A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCF2C8FE2FFAE669008E06A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C0A1F032FFB0001008E06A4 /* ScreenshotQualificationFingerprint.generated.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A1B2C3082FFAE669008E06A4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCF2C9012FFAE669008E06A4 /* CommonPlateios */;
+			targetProxy = A1B2C3072FFAE669008E06A4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A1B2C3092FFAE669008E06A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fwinford.CommonPlateiosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CommonPlateios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CommonPlateios";
+			};
+			name = Debug;
+		};
+		A1B2C30A2FFAE669008E06A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fwinford.CommonPlateiosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CommonPlateios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CommonPlateios";
+			};
+			name = Release;
+		};
+		DCF2C90B2FFAE66A008E06A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DCF2C90C2FFAE66A008E06A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DCF2C90E2FFAE66A008E06A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = GoodGrubAppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CommonPlateios/CommonPlateios.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 59HP2WV2CC;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CommonPlateios/Info.plist;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "CommonPlate connects to the local development server on your Wi-Fi network during testing.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fwinford.CommonPlateios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		DCF2C90F2FFAE66A008E06A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = GoodGrubAppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CommonPlateios/CommonPlateios.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 59HP2WV2CC;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Configuration/Release-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fwinford.CommonPlateios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1B2C30B2FFAE669008E06A4 /* Build configuration list for PBXNativeTarget "CommonPlateiosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1B2C3092FFAE669008E06A4 /* Debug */,
+				A1B2C30A2FFAE669008E06A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCF2C8FD2FFAE669008E06A4 /* Build configuration list for PBXProject "CommonPlateios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCF2C90B2FFAE66A008E06A4 /* Debug */,
+				DCF2C90C2FFAE66A008E06A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCF2C90D2FFAE66A008E06A4 /* Build configuration list for PBXNativeTarget "CommonPlateios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCF2C90E2FFAE66A008E06A4 /* Debug */,
+				DCF2C90F2FFAE66A008E06A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DCF2C8FA2FFAE669008E06A4 /* Project object */;
+}

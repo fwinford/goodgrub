@@ -1,0 +1,17 @@
+// Typecheck-only project: the same compiler settings as `tsconfig.json`, plus
+// every test file. Tests are kept out of `tsconfig.json` so `npm run build`
+// neither emits them into `dist/` nor needs devDependency types (vitest) to
+// resolve during a production install.
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": [
+    "app.ts",
+    "models/**/*.ts",
+    "scripts/**/*.ts",
+    "src/**/*.ts"
+  ],
+  "exclude": ["node_modules", "dist", "public"]
+}

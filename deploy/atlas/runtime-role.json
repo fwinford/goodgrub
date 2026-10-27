@@ -1,0 +1,34 @@
+{
+  "roleName": "commonplateRuntime",
+  "actions": [
+    {
+      "action": "FIND",
+      "resources": [{ "db": "commonplate_production", "collection": "" }]
+    },
+    {
+      "action": "INSERT",
+      "resources": [{ "db": "commonplate_production", "collection": "" }]
+    },
+    {
+      "action": "UPDATE",
+      "resources": [{ "db": "commonplate_production", "collection": "" }]
+    },
+    {
+      "action": "REMOVE",
+      "resources": [{ "db": "commonplate_production", "collection": "" }]
+    },
+    {
+      "action": "CREATE_COLLECTION",
+      "resources": [{ "db": "commonplate_production", "collection": "" }]
+    },
+    {
+      "action": "CREATE_INDEX",
+      "resources": [{ "db": "commonplate_production", "collection": "" }]
+    },
+    {
+      "action": "LIST_INDEXES",
+      "resources": [{ "db": "commonplate_production", "collection": "" }]
+    }
+  ],
+  "inheritedRoles": []
+}

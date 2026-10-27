@@ -1,0 +1,10 @@
+/* Main Stylesheet - Modular CSS imports for CommonPlate @ NYU */
+
+/* Base - Variables, resets, and global styles */
+@import './css/base.css';
+
+/* Components - Reusable UI components (buttons, cards, modals, forms) */
+@import './css/components.css';
+
+/* Layout - Page structure (header, footer, sections) */
+@import './css/layout.css';

@@ -1,0 +1,12 @@
+[Unit]
+Description=Periodically check GoodGrub CommonPlate readiness
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=1min
+AccuracySec=15s
+Persistent=true
+Unit=commonplate-readiness.service
+
+[Install]
+WantedBy=timers.target

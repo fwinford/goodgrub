@@ -1,0 +1,45 @@
+name: Contributor CI
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: contributor-ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  contributor-ci:
+    name: contributor-ci
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out pull request
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: 24.13.0
+          package-manager-cache: false
+
+      - name: Verify Node.js and npm versions
+        run: |
+          test "$(node --version)" = "v24.13.0"
+          test "$(npm --version)" = "11.6.2"
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Run tests
+        run: npm test -- --no-file-parallelism

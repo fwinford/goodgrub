@@ -1,0 +1,4626 @@
+{
+  "version": 1,
+  "note": "Synthetic conformance vectors shared by src/screenshotConformanceVectors.test.ts (backend) and ScreenshotConformanceVectorTests.swift (iOS on-device validator). Expected values are the backend implementation's own output and must be edited deliberately in both suites' favor, never regenerated silently. No real screenshot or OCR content. W4-R4.1 deliberate edits include checkout/review eligibility, deterministic menu path, bounded structural/payment rules, top-level meal inference, and the `totalGeometry` derived-evidence parity matrix. Geometry vectors contain no coordinates: only complete synthetic observation classifications, cents, validity, and same-row/right-side claims.",
+  "totalGeometry": [
+    {
+      "id": "unique-derived-total",
+      "evidenceTexts": ["Your Pickup Order\nContinue to Checkout\n$9.00\nItems subtotal\n$14.00\nSales tax\n$1.45\nTotal\nOrder actions\n$15.45"],
+      "geometryEvidence": [{
+        "observations": [
+          {"id": 2, "classification": "amount", "cents": 900, "geometryValid": true},
+          {"id": 4, "classification": "amount", "cents": 1400, "geometryValid": true},
+          {"id": 6, "classification": "amount", "cents": 145, "geometryValid": true},
+          {"id": 7, "classification": "total-label", "geometryValid": true},
+          {"id": 9, "classification": "amount", "cents": 1545, "geometryValid": true}
+        ],
+        "relations": [
+          {"totalObservationID": 7, "amountObservationID": 2, "sameRow": false, "rightOf": false},
+          {"totalObservationID": 7, "amountObservationID": 4, "sameRow": false, "rightOf": true},
+          {"totalObservationID": 7, "amountObservationID": 6, "sameRow": false, "rightOf": true},
+          {"totalObservationID": 7, "amountObservationID": 9, "sameRow": true, "rightOf": true}
+        ]
+      }],
+      "expected": {"totalCents": 1545, "menuPath": "dining-dollars", "conflict": false}
+    },
+    {
+      "id": "zero-derived-relations",
+      "evidenceTexts": ["Your Pickup Order\nContinue to Checkout\nTotal\nOrder actions\n$15.45\n$9.00"],
+      "geometryEvidence": [{
+        "observations": [
+          {"id": 2, "classification": "total-label", "geometryValid": true},
+          {"id": 4, "classification": "amount", "cents": 1545, "geometryValid": true},
+          {"id": 5, "classification": "amount", "cents": 900, "geometryValid": true}
+        ],
+        "relations": [
+          {"totalObservationID": 2, "amountObservationID": 4, "sameRow": false, "rightOf": true},
+          {"totalObservationID": 2, "amountObservationID": 5, "sameRow": false, "rightOf": true}
+        ]
+      }],
+      "expected": {"totalCents": null, "menuPath": null, "conflict": false}
+    },
+    {
+      "id": "two-derived-relations",
+      "evidenceTexts": ["Your Pickup Order\nContinue to Checkout\nTotal\nOrder actions\n$15.45\n$9.00"],
+      "geometryEvidence": [{
+        "observations": [
+          {"id": 2, "classification": "total-label", "geometryValid": true},
+          {"id": 4, "classification": "amount", "cents": 1545, "geometryValid": true},
+          {"id": 5, "classification": "amount", "cents": 900, "geometryValid": true}
+        ],
+        "relations": [
+          {"totalObservationID": 2, "amountObservationID": 4, "sameRow": true, "rightOf": true},
+          {"totalObservationID": 2, "amountObservationID": 5, "sameRow": true, "rightOf": true}
+        ]
+      }],
+      "expected": {"totalCents": null, "menuPath": null, "conflict": false}
+    },
+    {
+      "id": "incomplete-candidate-list",
+      "evidenceTexts": ["Your Pickup Order\nContinue to Checkout\nTotal\nOrder actions\n$15.45\n$9.00"],
+      "geometryEvidence": [{
+        "observations": [
+          {"id": 2, "classification": "total-label", "geometryValid": true},
+          {"id": 4, "classification": "amount", "cents": 1545, "geometryValid": true}
+        ],
+        "relations": [
+          {"totalObservationID": 2, "amountObservationID": 4, "sameRow": true, "rightOf": true}
+        ]
+      }],
+      "expected": {"totalCents": null, "menuPath": null, "conflict": false}
+    },
+    {
+      "id": "cross-image-edge-is-impossible",
+      "evidenceTexts": ["Your Pickup Order\nContinue to Checkout\nTotal", "Your Pickup Order\nContinue to Checkout\n$15.45"],
+      "geometryEvidence": [{
+        "observations": [{"id": 2, "classification": "total-label", "geometryValid": true}],
+        "relations": [{"totalObservationID": 2, "amountObservationID": 2, "sameRow": true, "rightOf": true}]
+      }, null],
+      "expected": {"totalCents": null, "menuPath": null, "conflict": false}
+    },
+    {
+      "id": "text-only-total-remains-authoritative",
+      "evidenceTexts": ["Your Pickup Order\nContinue to Checkout\nTotal\n$15.45"],
+      "geometryEvidence": [null],
+      "expected": {"totalCents": 1545, "menuPath": "dining-dollars", "conflict": false}
+    }
+  ],
+  "eligibility": [
+    {
+      "id": "near-empty",
+      "evidenceText": "hi",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "cart-chrome-basic",
+      "evidenceText": "Your Pickup Order Order Instructions Cilantro on the side Continue to Checkout",
+      "expected": {
+        "eligible": true,
+        "category": "cart"
+      }
+    },
+    {
+      "id": "cart-delivery-order",
+      "evidenceText": "Your Delivery Order\nAdd more items\nSubtotal",
+      "expected": {
+        "eligible": true,
+        "category": "cart"
+      }
+    },
+    {
+      "id": "checkout-review-pickup-excluded",
+      "evidenceText": "Review your pickup order please confirm this order today",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "checkout-place-delivery-excluded",
+      "evidenceText": "Place your delivery order now to complete checkout process",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "checkout-place-pickup-excluded",
+      "evidenceText": "Place your pickup order now to complete checkout process",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "checkout-context-plus-other-cart-phrase",
+      "evidenceText": "Review your pickup order\nOrder instructions\nAdd more items",
+      "expected": {
+        "eligible": true,
+        "category": "cart"
+      }
+    },
+    {
+      "id": "historical-basic",
+      "evidenceText": "View order\nOrder information\n2 x Chicken Bowl\nSubtotal 12.00",
+      "expected": {
+        "eligible": true,
+        "category": "historical"
+      }
+    },
+    {
+      "id": "historical-x-suffix-quantity",
+      "evidenceText": "View order\nOrder information\n2x Chicken Bowl with rice",
+      "expected": {
+        "eligible": true,
+        "category": "historical"
+      }
+    },
+    {
+      "id": "historical-view-order-details-negated",
+      "evidenceText": "View order details\nOrder information\n2 x Chicken Bowl\nSubtotal 12.00",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "historical-missing-order-information",
+      "evidenceText": "View order\nDelivery details\n2 x Chicken Bowl\nSubtotal 12.00",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "historical-missing-quantity-prefix",
+      "evidenceText": "View order\nOrder information\nChicken Bowl\nSubtotal 12.00 total",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "historical-three-digit-quantity-rejected",
+      "evidenceText": "View order\nOrder information\n123 chicken bowl\nSubtotal total",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "historical-view-order-inside-longer-word",
+      "evidenceText": "Preview order\nOrder information\n2 x Chicken Bowl\nSubtotal 12.00",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "historical-non-ascii-before-view-order",
+      "evidenceText": "éview order\norder information\n2 chicken bowl\nsubtotal 12.00",
+      "expected": {
+        "eligible": true,
+        "category": "historical"
+      }
+    },
+    {
+      "id": "historical-order-information-suffix-word",
+      "evidenceText": "View order\nOrder informations\n2 x Chicken Bowl\nSubtotal 12.00",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "items-subtotal-only",
+      "evidenceText": "Items subtotal 12.00 tax fee tip total",
+      "expected": {
+        "eligible": true,
+        "category": "cart"
+      }
+    },
+    {
+      "id": "nbsp-collapses-in-phrase",
+      "evidenceText": "Your pickup order and more text here",
+      "expected": {
+        "eligible": true,
+        "category": "cart"
+      }
+    },
+    {
+      "id": "legibility-boundary-19-nonwhitespace",
+      "evidenceText": "empty bag abcdefghijk",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "legibility-boundary-20-nonwhitespace",
+      "evidenceText": "empty bag abcdefghijkl",
+      "expected": {
+        "eligible": true,
+        "category": "cart"
+      }
+    },
+    {
+      "id": "legibility-whitespace-not-counted",
+      "evidenceText": "empty   \n\n  bag   x  ",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "bom-whitespace-not-counted",
+      "evidenceText": "empty﻿bag﻿﻿abcdefghi",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "unsupported-menu-screen",
+      "evidenceText": "Menu browse popular items reviews rating delivery fee 3.99",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "empty-string",
+      "evidenceText": "",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "checkout-pickup-your-order-item",
+      "evidenceText": "Review your pickup order\nYour order\n1 Chicken Bowl\nSubtotal 12.00",
+      "expected": {
+        "eligible": true,
+        "category": "checkout"
+      }
+    },
+    {
+      "id": "checkout-delivery-your-order-item",
+      "evidenceText": "Review your delivery order\nYour order\n2x Chicken Bowl\nSubtotal 12.00",
+      "expected": {
+        "eligible": true,
+        "category": "checkout"
+      }
+    },
+    {
+      "id": "checkout-pickup-your-payment-row",
+      "evidenceText": "Review your pickup order\nYour payment\nPayment method\nDining Dollars",
+      "expected": {
+        "eligible": true,
+        "category": "checkout"
+      }
+    },
+    {
+      "id": "checkout-delivery-your-payment-inline-row",
+      "evidenceText": "Review your delivery order\nYour payment\nPayment method Dining Dollars >",
+      "expected": {
+        "eligible": true,
+        "category": "checkout"
+      }
+    },
+    {
+      "id": "checkout-crlf-lines",
+      "evidenceText": "Review your pickup order\r\nYour order\r\n2x Chicken Bowl",
+      "expected": {
+        "eligible": true,
+        "category": "checkout"
+      }
+    },
+    {
+      "id": "checkout-classified-before-cart-phrases",
+      "evidenceText": "Review your pickup order\nYour order\n1 Chicken Bowl\nOrder instructions\nAdd more items",
+      "expected": {
+        "eligible": true,
+        "category": "checkout"
+      }
+    },
+    {
+      "id": "checkout-heading-only-not-eligible",
+      "evidenceText": "Review your pickup order\nTotal due today\nEstimated total 12.00",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "checkout-your-order-without-item-line",
+      "evidenceText": "Review your pickup order\nYour order\nSubtotal 12.00\nTax 1.06",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "checkout-your-payment-without-method-row",
+      "evidenceText": "Review your pickup order\nYour payment\nSubtotal 12.00\nTotal 13.06",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "checkout-payment-row-later-under-section",
+      "evidenceText": "Review your pickup order\nYour payment\nSubtotal 12.00\nPayment method\nDining Dollars",
+      "expected": {
+        "eligible": true,
+        "category": "checkout"
+      }
+    },
+    {
+      "id": "checkout-canonical-review-heading-and-split-labels",
+      "evidenceText": "Review your\npickup order\nYour\npayment\nSubtotal 12.00\nPayment\nmethod\nDining Dollars",
+      "expected": { "eligible": true, "category": "checkout" }
+    },
+    {
+      "id": "checkout-cart-chrome-with-split-review-markers",
+      "evidenceText": "Your pickup order\nContinue to checkout\nReview your\npickup order\nYour\npayment\nPayment\nmethod Dining Dollars",
+      "expected": { "eligible": true, "category": "checkout" }
+    },
+    {
+      "id": "checkout-split-heading-without-payment-row-stays-cart",
+      "evidenceText": "Your pickup order\nContinue to checkout\nReview your\npickup order\nYour payment\nSubtotal 12.00",
+      "expected": { "eligible": true, "category": "cart" }
+    },
+    {
+      "id": "checkout-duplicate-payment-rows-without-order-item-ineligible",
+      "evidenceText": "Review your pickup order\nYour payment\nPayment method\nDining Dollars\nPayment method\nVisa",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-split-labels-without-review-heading-stay-unsupported",
+      "evidenceText": "Menu browse popular items\nYour\npayment\nPayment\nmethod\nDining Dollars",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-item-line-after-your-payment-not-in-your-order",
+      "evidenceText": "Review your pickup order\nYour order\nYour payment\nSubtotal 12.00\n1 Chicken Bowl",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "checkout-generic-review-your-order-heading-not-authorized",
+      "evidenceText": "Review your order\nYour order\n1 Chicken Bowl\nYour payment\nPayment method\nDining Dollars",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-generic-review-your-order-heading-split-not-authorized",
+      "evidenceText": "Review your\norder\nYour payment\nPayment method\nDining Dollars",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-duplicate-payment-headings-do-not-extend-your-order",
+      "evidenceText": "Review your pickup order\nYour order\nYour payment\n1 Chicken Bowl\nYour payment",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-order-item-before-malformed-later-payment-stays-eligible",
+      "evidenceText": "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nYour payment",
+      "expected": { "eligible": true, "category": "checkout" }
+    },
+    {
+      "id": "checkout-payment-row-after-receipt-not-in-your-payment",
+      "evidenceText": "Review your pickup order\nYour payment\nReceipt\nPayment method\nDining Dollars",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-payment-row-after-order-confirmation-not-in-your-payment",
+      "evidenceText": "Review your pickup order\nYour payment\nOrder confirmation\nPayment method\nDining Dollars",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-payment-row-after-split-order-confirmation-not-in-your-payment",
+      "evidenceText": "Review your pickup order\nYour payment\nOrder\nconfirmation\nPayment method\nDining Dollars",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-payment-row-after-promo-control-stays-in-your-payment",
+      "evidenceText": "Review your pickup order\nYour payment\nApply a promo code\nPayment method\nDining Dollars",
+      "expected": { "eligible": true, "category": "checkout" }
+    },
+    {
+      "id": "checkout-real-layout-payment-then-order",
+      "evidenceText": "Review your pickup order\nYour payment\nPayment method\nDining Dollars\nApply a promo code\nYour order\n1 Coffee\nTotal $4.30",
+      "expected": { "eligible": true, "category": "checkout" }
+    },
+    {
+      "id": "checkout-item-after-decorated-your-payment-not-in-your-order",
+      "evidenceText": "Review your pickup order\nYour order\nYour payment ›\n1 Chicken Bowl",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-item-after-receipt-not-in-your-order",
+      "evidenceText": "Review your pickup order\nYour order\nReceipt\n1 Chicken Bowl",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-item-after-decorated-receipt-not-in-your-order",
+      "evidenceText": "Review your pickup order\nYour order\nReceipt ›\n1 Chicken Bowl",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-item-after-decorated-order-confirmation-not-in-your-order",
+      "evidenceText": "Review your pickup order\nYour order\nOrder confirmation: 123\n1 Chicken Bowl",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-item-after-decorated-place-order-cta-not-in-your-order",
+      "evidenceText": "Review your pickup order\nYour order\nPlace your pickup order ›\n1 Chicken Bowl",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-item-after-order-history-not-in-your-order",
+      "evidenceText": "Review your pickup order\nYour order\nOrder history\n1 Chicken Bowl",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-item-after-past-orders-not-in-your-order",
+      "evidenceText": "Review your pickup order\nYour order\nPast orders\n1 Chicken Bowl",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-item-before-decorated-boundary-stays-eligible",
+      "evidenceText": "Review your pickup order\nYour order\n1 Chicken Bowl\nReceipt ›\n1 Pasta Bowl",
+      "expected": { "eligible": true, "category": "checkout" }
+    },
+    {
+      "id": "checkout-item-before-decorated-duplicate-payment-stays-eligible",
+      "evidenceText": "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment ›\nYour payment",
+      "expected": { "eligible": true, "category": "checkout" }
+    },
+    {
+      "id": "checkout-decorated-departures-grant-no-positive-authority",
+      "evidenceText": "Review your pickup order\nReceipt ›\nOrder confirmation: 123\nOrder history\nPlace your pickup order ›",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-decorated-your-payment-does-not-open-payment-section",
+      "evidenceText": "Review your pickup order\nYour payment ›\nPayment method\nDining Dollars",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-decorated-your-order-does-not-open-order-section",
+      "evidenceText": "Review your pickup order\nYour order ›\n1 Chicken Bowl",
+      "expected": { "eligible": false, "category": null }
+    },
+    {
+      "id": "checkout-second-your-order-heading-does-not-end-order-scan",
+      "evidenceText": "Review your pickup order\nYour order\nYour order\n1 Chicken Bowl",
+      "expected": { "eligible": true, "category": "checkout" }
+    },
+    {
+      "id": "checkout-long-unrelated-content-does-not-end-order-scan",
+      "evidenceText": "Review your pickup order\nYour order\nDetail 0\nDetail 1\nDetail 2\nDetail 3\nDetail 4\nDetail 5\nDetail 6\nDetail 7\nDetail 8\nDetail 9\nDetail 10\nDetail 11\nDetail 12\nDetail 13\nDetail 14\nDetail 15\nDetail 16\nDetail 17\nDetail 18\nDetail 19\nDetail 20\nDetail 21\nDetail 22\nDetail 23\nDetail 24\nDetail 25\nDetail 26\nDetail 27\nDetail 28\nDetail 29\nDetail 30\nDetail 31\nDetail 32\nDetail 33\nDetail 34\nDetail 35\nDetail 36\nDetail 37\nDetail 38\nDetail 39\n1 Chicken Bowl",
+      "expected": { "eligible": true, "category": "checkout" }
+    },
+    {
+      "id": "checkout-undecorated-lookalike-is-not-a-departure",
+      "evidenceText": "Review your pickup order\nYour order\nReceipts\nReceipt of purchase\n1 Chicken Bowl",
+      "expected": { "eligible": true, "category": "checkout" }
+    },
+    {
+      "id": "checkout-cart-chrome-without-review-structure-stays-cart",
+      "evidenceText": "Your pickup order\nContinue to checkout\nPayment method\nDining Dollars",
+      "expected": { "eligible": true, "category": "cart" }
+    },
+    {
+      "id": "checkout-sections-without-heading",
+      "evidenceText": "Your order\n1 Chicken Bowl\nYour payment\nPayment method\nDining Dollars",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "checkout-place-cta-only",
+      "evidenceText": "Place your pickup order\nYour order\n1 Chicken Bowl",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "checkout-heading-inside-longer-line",
+      "evidenceText": "Please Review your pickup order today\nYour order\n1 Chicken Bowl",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "checkout-payment-label-glued-to-letters",
+      "evidenceText": "Review your pickup order\nYour payment\nPayment methods\nDining Dollars",
+      "expected": {
+        "eligible": false,
+        "category": null
+      }
+    },
+    {
+      "id": "cart-with-payment-rows-but-no-heading-stays-cart",
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nYour payment\nPayment method\nDining Dollars",
+      "expected": {
+        "eligible": true,
+        "category": "cart"
+      }
+    },
+    {
+      "id": "historical-unchanged-by-checkout-category",
+      "evidenceText": "View order\nOrder information\n2 x Chicken Bowl\nPayment method\nDining Dollars",
+      "expected": {
+        "eligible": true,
+        "category": "historical"
+      }
+    }
+  ],
+  "mealSwipeCorroboration": [
+    {
+      "id": "no-marker",
+      "evidenceText": "Your pickup order chicken bowl",
+      "expected": null
+    },
+    {
+      "id": "two-item-markers",
+      "evidenceText": "Bowl 1M\nWrap 1M",
+      "expected": 2
+    },
+    {
+      "id": "aggregate-3M",
+      "evidenceText": "Your pickup order 3M",
+      "expected": 3
+    },
+    {
+      "id": "aggregate-repeated-same",
+      "evidenceText": "3M summary\n3M total",
+      "expected": 3
+    },
+    {
+      "id": "aggregate-conflicting",
+      "evidenceText": "3M summary\n4M total",
+      "expected": null
+    },
+    {
+      "id": "aggregate-out-of-range-6",
+      "evidenceText": "6M total",
+      "expected": null
+    },
+    {
+      "id": "aggregate-out-of-range-zero",
+      "evidenceText": "0M total",
+      "expected": null
+    },
+    {
+      "id": "six-item-markers",
+      "evidenceText": "1M 1M 1M 1M 1M 1M",
+      "expected": null
+    },
+    {
+      "id": "five-item-markers",
+      "evidenceText": "1M 1M 1M 1M 1M",
+      "expected": 5
+    },
+    {
+      "id": "decimal-suffix-guard",
+      "evidenceText": "3.0M total",
+      "expected": null
+    },
+    {
+      "id": "two-digit-out-of-range",
+      "evidenceText": "13M total",
+      "expected": null
+    },
+    {
+      "id": "word-prefix-guard",
+      "evidenceText": "x3M total",
+      "expected": null
+    },
+    {
+      "id": "space-before-M",
+      "evidenceText": "3 M total",
+      "expected": 3
+    },
+    {
+      "id": "nbsp-before-M",
+      "evidenceText": "3 M total",
+      "expected": 3
+    },
+    {
+      "id": "lowercase-m-not-marker",
+      "evidenceText": "3m total",
+      "expected": null
+    },
+    {
+      "id": "item-markers-with-aggregate",
+      "evidenceText": "Bowl 1M\nWrap 1M\nTotal 3M",
+      "expected": 3
+    },
+    {
+      "id": "two-distinct-aggregates",
+      "evidenceText": "2M and 3M",
+      "expected": null
+    },
+    {
+      "id": "adjacent-markers-no-boundary",
+      "evidenceText": "1M1M",
+      "expected": null
+    },
+    {
+      "id": "marker-followed-by-letter",
+      "evidenceText": "3Mx total",
+      "expected": null
+    },
+    {
+      "id": "marker-with-plus-dollars",
+      "evidenceText": "Cost 3M+$2.00",
+      "expected": 3
+    },
+    {
+      "id": "non-ascii-before-marker",
+      "evidenceText": "é3M total",
+      "expected": 3
+    },
+    {
+      "id": "non-ascii-after-marker",
+      "evidenceText": "3Mé total",
+      "expected": 3
+    }
+  ],
+  "providerOutput": [
+    {
+      "id": "inferred-provider-count-does-not-control",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 5
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\n1 Create Your Own Pasta Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ],
+          "mealSwipes": 2
+        }
+      }
+    },
+    {
+      "id": "inferred-one-image-two-identical-lines",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\n1 Build Your Own Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Build Your Own Bowl"
+            }
+          ],
+          "mealSwipes": 2
+        }
+      }
+    },
+    {
+      "id": "inferred-unicode-top-level-name",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Éclair Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Éclair Bowl\n1 Pasta Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Éclair Bowl"
+            },
+            {
+              "name": "1 Pasta Bowl"
+            }
+          ],
+          "mealSwipes": 2
+        }
+      }
+    },
+    {
+      "id": "inferred-split-bullet-modifier-cannot-ground",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "• Extra Sauce",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\n1\n• Extra Sauce",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 • Extra Sauce"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "inferred-prefix-names-use-distinct-ocr-lines",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Build Your Own Bowl Deluxe",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl Deluxe\n1 Build Your Own Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Build Your Own Bowl Deluxe"
+            }
+          ],
+          "mealSwipes": 2
+        }
+      }
+    },
+    {
+      "id": "inferred-two-top-level-meals",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nCrave NYU - Meal Exchange\n1 Build Your Own Bowl\n1 Create Your Own Pasta Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ],
+          "mealSwipes": 2,
+          "selectedDiningSpot": {
+            "name": "Crave NYU",
+            "address": "John A. Paulson Center, 6th Floor"
+          }
+        }
+      }
+    },
+    {
+      "id": "inferred-vision-split-quantity",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nCrave NYU - Meal Exchange\n1\nBuild Your Own Bowl\n1\nCreate Your Own Pasta Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ],
+          "mealSwipes": 2,
+          "selectedDiningSpot": {
+            "name": "Crave NYU",
+            "address": "John A. Paulson Center, 6th Floor"
+          }
+        }
+      }
+    },
+    {
+      "id": "inferred-modifiers-do-not-add-count",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": [
+              "Extra Sauce"
+            ]
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nCrave NYU - Meal Exchange\n1 Build Your Own Bowl\n• Extra Sauce\n1 Create Your Own Pasta Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl",
+              "details": "Extra Sauce"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ],
+          "mealSwipes": 2,
+          "selectedDiningSpot": {
+            "name": "Crave NYU",
+            "address": "John A. Paulson Center, 6th Floor"
+          }
+        }
+      }
+    },
+    {
+      "id": "inferred-ungrounded-item-withheld",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nCrave NYU - Meal Exchange\n1 Build Your Own Bowl\n• Create Your Own Pasta Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ],
+          "selectedDiningSpot": {
+            "name": "Crave NYU",
+            "address": "John A. Paulson Center, 6th Floor"
+          }
+        }
+      }
+    },
+    {
+      "id": "inferred-nonunit-quantity-withheld",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 2,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nCrave NYU - Meal Exchange\n1 Build Your Own Bowl\n2 Create Your Own Pasta Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "2 Create Your Own Pasta Bowl"
+            }
+          ],
+          "selectedDiningSpot": {
+            "name": "Crave NYU",
+            "address": "John A. Paulson Center, 6th Floor"
+          }
+        }
+      }
+    },
+    {
+      "id": "inferred-unresolved-explicit-0M-withheld",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nCrave NYU - Meal Exchange\n1 Build Your Own Bowl\n1 Create Your Own Pasta Bowl\n0M",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ],
+          "selectedDiningSpot": {
+            "name": "Crave NYU",
+            "address": "John A. Paulson Center, 6th Floor"
+          }
+        }
+      }
+    },
+    {
+      "id": "inferred-explicit-1M-preserved",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 1
+      },
+      "evidenceText": "View order\nOrder information\nCrave NYU - Meal Exchange\n1 Build Your Own Bowl\n1 Create Your Own Pasta Bowl\n1M",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ],
+          "mealSwipes": 1,
+          "selectedDiningSpot": {
+            "name": "Crave NYU",
+            "address": "John A. Paulson Center, 6th Floor"
+          }
+        }
+      }
+    },
+    {
+      "id": "inferred-multi-image-repeated-name-withheld",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": [
+              "No Side"
+            ]
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceTexts": [
+        "View order\nOrder information\nCrave NYU - Meal Exchange\n1 Build Your Own Bowl",
+        "View order\nOrder information\nCrave NYU - Meal Exchange\n1 Build Your Own Bowl"
+      ],
+      "evidenceImageCount": 2,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Build Your Own Bowl",
+              "details": "No Side"
+            }
+          ],
+          "selectedDiningSpot": {
+            "name": "Crave NYU",
+            "address": "John A. Paulson Center, 6th Floor"
+          }
+        }
+      },
+      "evidenceText": "View order\nOrder information\nCrave NYU - Meal Exchange\n1 Build Your Own Bowl\nView order\nOrder information\nCrave NYU - Meal Exchange\n1 Build Your Own Bowl"
+    },
+    {
+      "id": "inferred-dining-path-withheld",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Review your pickup order\nYour order\n1 Build Your Own Bowl\n1 Create Your Own Pasta Bowl\nYour payment\nPayment method\nDining Dollars",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "dining-dollars",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "inferred-single-grounded-meal-not-proposed",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "inferred-five-grounded-meals-proposed",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Alpha Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Bravo Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Charlie Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Delta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Echo Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Alpha Bowl\n1 Bravo Bowl\n1 Charlie Bowl\n1 Delta Bowl\n1 Echo Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Alpha Bowl"
+            },
+            {
+              "name": "1 Bravo Bowl"
+            },
+            {
+              "name": "1 Charlie Bowl"
+            },
+            {
+              "name": "1 Delta Bowl"
+            },
+            {
+              "name": "1 Echo Bowl"
+            }
+          ],
+          "mealSwipes": 5
+        }
+      }
+    },
+    {
+      "id": "inferred-six-grounded-meals-withheld",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Alpha Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Bravo Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Charlie Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Delta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Echo Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Foxtrot Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Alpha Bowl\n1 Bravo Bowl\n1 Charlie Bowl\n1 Delta Bowl\n1 Echo Bowl\n1 Foxtrot Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Alpha Bowl"
+            },
+            {
+              "name": "1 Bravo Bowl"
+            },
+            {
+              "name": "1 Charlie Bowl"
+            },
+            {
+              "name": "1 Delta Bowl"
+            },
+            {
+              "name": "1 Echo Bowl"
+            },
+            {
+              "name": "1 Foxtrot Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "inferred-ocr-quantity-two-contradicts-provider-quantity-one",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\n2 Create Your Own Pasta Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "inferred-ocr-split-quantity-two-contradicts-provider-quantity-one",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1\nBuild Your Own Bowl\n2\nCreate Your Own Pasta Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "inferred-name-before-lone-one-does-not-ground",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\nCreate Your Own Pasta Bowl\n1",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "inferred-lone-one-ending-screenshot-a-does-not-stitch-to-screenshot-b",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceTexts": [
+        "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\n1",
+        "Create Your Own Pasta Bowl\nView order\nOrder information\nUnlisted Cafe - Meal Exchange\n2 Iced Teas"
+      ],
+      "evidenceImageCount": 2,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ]
+        }
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\n1\nCreate Your Own Pasta Bowl\nView order\nOrder information\nUnlisted Cafe - Meal Exchange\n2 Iced Teas"
+    },
+    {
+      "id": "inferred-one-ocr-line-cannot-ground-two-identical-entries",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Build Your Own Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "inferred-identical-entry-across-two-screenshots-withheld",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceTexts": [
+        "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl",
+        "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl"
+      ],
+      "evidenceImageCount": 2,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange"
+        }
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\nView order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl"
+    },
+    {
+      "id": "inferred-two-screenshots-two-distinct-grounded-meals",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceTexts": [
+        "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl",
+        "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Create Your Own Pasta Bowl"
+      ],
+      "evidenceImageCount": 2,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ],
+          "mealSwipes": 2
+        }
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\nView order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Create Your Own Pasta Bowl"
+    },
+    {
+      "id": "inferred-two-screenshots-overlapping-line-reported-once",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Build Your Own Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Create Your Own Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceTexts": [
+        "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl",
+        "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\n1 Create Your Own Pasta Bowl"
+      ],
+      "evidenceImageCount": 2,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ],
+          "mealSwipes": 2
+        }
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\nView order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\n1 Create Your Own Pasta Bowl"
+    },
+    {
+      "id": "inferred-character-prefix-is-not-word-boundary-grounding",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "Pasta Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Bowls Of Joy\n1 Pasta Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Bowl"
+            },
+            {
+              "name": "1 Pasta Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "inferred-null-quantity-with-literal-one-in-name-withheld",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "1 Build Your Own Bowl",
+            "quantity": null,
+            "modifiers": []
+          },
+          {
+            "name": "1 Create Your Own Pasta Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "View order\nOrder information\nUnlisted Cafe - Meal Exchange\n1 Build Your Own Bowl\n1 Create Your Own Pasta Bowl",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Build Your Own Bowl"
+            },
+            {
+              "name": "1 Create Your Own Pasta Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "valid-full-proposal",
+      "raw": {
+        "visibleVenueText": "Jasper Kane Cafe",
+        "foodItems": [
+          {
+            "name": "Create Your Own Bowl",
+            "quantity": 1,
+            "modifiers": [
+              "Chicken",
+              "No Side"
+            ]
+          }
+        ],
+        "mealSwipes": 1
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nJasper Kane Cafe\nBowl 1M",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "selectedDiningSpot": {
+            "name": "Jasper Kane Cafe",
+            "address": "BROOKLYN, Rogers Hall"
+          },
+          "mealItems": [
+            {
+              "name": "1 Create Your Own Bowl",
+              "details": "Chicken, No Side"
+            }
+          ],
+          "mealSwipes": 1,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "valid-provider-venue-null",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Wrap",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nJasper Kane Cafe",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "selectedDiningSpot": {
+            "name": "Jasper Kane Cafe",
+            "address": "BROOKLYN, Rogers Hall"
+          },
+          "mealItems": [
+            {
+              "name": "Wrap"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "forbidden-pickupName",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null,
+        "pickupName": "Sam"
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "forbidden_fields"
+      }
+    },
+    {
+      "id": "forbidden-timing",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null,
+        "timing": "ASAP"
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "forbidden_fields"
+      }
+    },
+    {
+      "id": "forbidden-menuPath",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null,
+        "menuPath": "diningDollars"
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "forbidden_fields"
+      }
+    },
+    {
+      "id": "forbidden-estimatedDiningDollarsCents",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null,
+        "estimatedDiningDollarsCents": 200
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "forbidden_fields"
+      }
+    },
+    {
+      "id": "forbidden-action-and-invalid-shape-reports-forbidden",
+      "raw": {
+        "action": "submit",
+        "foodItems": "nope"
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "forbidden_fields"
+      }
+    },
+    {
+      "id": "forbidden-reasoning",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null,
+        "reasoning": "because"
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "forbidden_fields"
+      }
+    },
+    {
+      "id": "schema-missing-mealSwipes-key",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": []
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-missing-visibleVenueText-key",
+      "raw": {
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-unknown-top-level-key",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null,
+        "extra": 1
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-mealSwipes-string",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": "3"
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-mealSwipes-fractional",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": 2.5
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-mealSwipes-boolean",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": true
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-item-unknown-key",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "x",
+            "quantity": null,
+            "modifiers": [],
+            "note": "hi"
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-item-quantity-string",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "x",
+            "quantity": "2",
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-item-missing-modifiers",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "x",
+            "quantity": null
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-item-modifier-not-string",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "x",
+            "quantity": null,
+            "modifiers": [
+              1
+            ]
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-venue-number",
+      "raw": {
+        "visibleVenueText": 5,
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-raw-array",
+      "raw": [],
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-raw-null",
+      "raw": null,
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "schema-raw-string",
+      "raw": "hello",
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "schema_invalid"
+      }
+    },
+    {
+      "id": "modifier-bare-yes-no-sanitized",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": [
+              "Yes",
+              " NO ",
+              "No Side",
+              "Yes Bag"
+            ]
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl",
+              "details": "No Side, Yes Bag"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "modifier-only-bare-tokens-leaves-no-details",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": [
+              "yes",
+              "no"
+            ]
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "modifier-empty-string-yields-no-details",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": [
+              ""
+            ]
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "item-blank-name-skipped",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "   ",
+            "quantity": null,
+            "modifiers": []
+          },
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "item-name-trims-nbsp-and-bom",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": " ﻿Bowl﻿ ",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "item-quantity-prefix-positive",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": 2,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "2 Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "item-quantity-zero-and-negative-no-prefix",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": 0,
+            "modifiers": []
+          },
+          {
+            "name": "Wrap",
+            "quantity": -1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            },
+            {
+              "name": "Wrap"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "duplicate-lines-single-image-kept",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "bowl ",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "1 Bowl"
+            },
+            {
+              "name": "1 bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "duplicate-lines-multi-image-ambiguous",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": 1,
+            "modifiers": []
+          },
+          {
+            "name": "bowl ",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 2
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\n1M 1M",
+      "evidenceImageCount": 2,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "duplicate-lines-multi-image-differ-by-modifier-kept",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": 1,
+            "modifiers": [
+              "Rice"
+            ]
+          },
+          {
+            "name": "Bowl",
+            "quantity": 1,
+            "modifiers": [
+              "Beans"
+            ]
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 3,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "1 Bowl",
+              "details": "Rice"
+            },
+            {
+              "name": "1 Bowl",
+              "details": "Beans"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "duplicate-identity-modifier-order-insensitive",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": 1,
+            "modifiers": [
+              "A",
+              "B"
+            ]
+          },
+          {
+            "name": "Bowl",
+            "quantity": 1,
+            "modifiers": [
+              "b",
+              "a"
+            ]
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 2,
+      "expected": {
+        "ok": true,
+        "proposal": {}
+      }
+    },
+    {
+      "id": "duplicate-blank-names-do-not-count-as-duplicates",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "",
+            "quantity": null,
+            "modifiers": []
+          },
+          {
+            "name": " ",
+            "quantity": null,
+            "modifiers": []
+          },
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 2,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "swipes-corroborated-by-markers",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          },
+          {
+            "name": "Wrap",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 2
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nBowl 1M\nWrap 1M",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            },
+            {
+              "name": "Wrap"
+            }
+          ],
+          "mealSwipes": 2,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "swipes-mismatch-dropped",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nBowl 1M",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "swipes-out-of-range-6-dropped",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 6
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\n6M",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "swipes-zero-dropped",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 0
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\n0M",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "swipes-aggregate-total-corroborates",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nBowl 1M\nTotal 3M",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "swipes-no-evidence-marker-dropped",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 2
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "swipes-negative-dropped",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": -1
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "vendor-grounded-only-by-evidence",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nCafe 370",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "selectedDiningSpot": {
+            "name": "Cafe 370",
+            "address": "BROOKLYN - 370 Jay St"
+          }
+        }
+      }
+    },
+    {
+      "id": "vendor-provider-text-alone-never-selects",
+      "raw": {
+        "visibleVenueText": "Jasper Kane Cafe",
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {}
+      }
+    },
+    {
+      "id": "vendor-provider-disagrees-with-evidence",
+      "raw": {
+        "visibleVenueText": "Jasper Kane Cafe",
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nCafe 370",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {}
+      }
+    },
+    {
+      "id": "vendor-provider-agrees-with-evidence",
+      "raw": {
+        "visibleVenueText": "jasper kane cafe dining",
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nJASPER KANE CAFE",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "selectedDiningSpot": {
+            "name": "Jasper Kane Cafe",
+            "address": "BROOKLYN, Rogers Hall"
+          }
+        }
+      }
+    },
+    {
+      "id": "vendor-provider-unresolvable-text-does-not-block",
+      "raw": {
+        "visibleVenueText": "Burger",
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nJasper Kane Cafe",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "selectedDiningSpot": {
+            "name": "Jasper Kane Cafe",
+            "address": "BROOKLYN, Rogers Hall"
+          }
+        }
+      }
+    },
+    {
+      "id": "vendor-evidence-names-two-vendors",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nJasper Kane Cafe\nCafe 370",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {}
+      }
+    },
+    {
+      "id": "vendor-bare-upstein-ambiguous",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nUpstein",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {}
+      }
+    },
+    {
+      "id": "vendor-full-upstein-name-resolves",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nUpstein - Vedge Craft & Smoothie Lab",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "selectedDiningSpot": {
+            "name": "Upstein - Vedge Craft & Smoothie Lab",
+            "address": "Weinstein Hall, 5 University Pl #11"
+          }
+        }
+      }
+    },
+    {
+      "id": "vendor-both-full-upstein-names-ambiguous",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nUpstein - Vedge Craft & Smoothie Lab\nUpstein - Shareables, Cluckstein, Slidestein & Taqueria",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {}
+      }
+    },
+    {
+      "id": "vendor-fragment-does-not-match",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nCoffee Cafe Burger",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {}
+      }
+    },
+    {
+      "id": "vendor-whitespace-and-case-normalized",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nDUNKIN'  at\n U-Hall",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "selectedDiningSpot": {
+            "name": "Dunkin' at U-Hall",
+            "address": "U-Hall, 108 E 14th St"
+          }
+        }
+      }
+    },
+    {
+      "id": "dollars-current-cart-marker",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order\n3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "estimatedDiningDollarsCents": 200,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-whole-dollar-no-cents",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order\n3M + $2",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "estimatedDiningDollarsCents": 200,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-requires-swipes-corroboration",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 2
+      },
+      "evidenceText": "Your pickup order\n3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-past-order-marker-fails-closed",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order receipt\n3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-conflicting-amounts-fail-closed",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order\n3M + $2.00\n3M + $3.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-repeated-identical-amount-ok",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order\n3M + $2.00\n3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "estimatedDiningDollarsCents": 200,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-over-cap-fails-closed",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order\n3M + $25.01",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-at-cap-allowed",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order\n3M + $25.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "estimatedDiningDollarsCents": 2500,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-zero-fails-closed",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order\n3M + $0.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-uppercase-marker-case-insensitive",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "YOUR PICKUP ORDER\n3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "estimatedDiningDollarsCents": 200,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-no-cart-marker-fails-closed",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Items subtotal\n3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-checkout-word-marker",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Items subtotal checkout\n3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "estimatedDiningDollarsCents": 200,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-cart-word-inside-longer-word-not-marker",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Items subtotal cartel\n3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-decimal-guard-before-swipes",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order\n1.3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dollars-whitespace-variants",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order\n3 M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "estimatedDiningDollarsCents": 200,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-received-word-not-past-marker",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order received\n3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "estimatedDiningDollarsCents": 200,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dollars-delivered-past-marker",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Bowl",
+            "quantity": null,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order delivered\n3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "empty-foodItems-yields-empty-proposal",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {}
+      }
+    },
+    {
+      "id": "empty-foodItems-with-swipes-corroborated",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": 2
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\n2M",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealSwipes": 2,
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "path-only-dining-dollars-from-selected-payment-row",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Review your pickup order\nYour payment\nPayment method\nDining Dollars",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "dining-dollars"
+        }
+      }
+    },
+    {
+      "id": "path-only-meal-exchange-from-explicit-wording",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nMeal Exchange",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange"
+        }
+      }
+    },
+    {
+      "id": "dining-path-with-items-and-labeled-total",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Chicken Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 2
+      },
+      "evidenceText": "Review your pickup order\nYour order\n1 Chicken Bowl\nSubtotal $12.00\nTotal $13.06\nYour payment\nPayment method\nDining Dollars",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "dining-dollars",
+          "diningDollarsOrderTotalCents": 1306,
+          "mealItems": [
+            {
+              "name": "1 Chicken Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "explicit-wording-supplies-no-swipe-count-or-amount",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Chicken Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 2
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nMeal Exchange",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Chicken Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "checkout-category-mixed-resource-grants-no-amount-authority",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Chicken Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Review your pickup order\nYour order\n1 Chicken Bowl\n3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Chicken Bowl"
+            }
+          ],
+          "mealSwipes": 3
+        }
+      }
+    },
+    {
+      "id": "checkout-delivery-category-mixed-resource-grants-no-amount-authority",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Chicken Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Review your delivery order\nYour order\n1 Chicken Bowl\n3M + $2.00",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Chicken Bowl"
+            }
+          ],
+          "mealSwipes": 3
+        }
+      }
+    },
+    {
+      "id": "checkout-category-cta-and-checkout-word-grant-no-amount-authority",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Chicken Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Review your pickup order\nCheckout\nYour order\n1 Chicken Bowl\n3M + $2.00\nPlace your pickup order",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Chicken Bowl"
+            }
+          ],
+          "mealSwipes": 3
+        }
+      }
+    },
+    {
+      "id": "multi-image-cart-amount-survives-alongside-checkout-image",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Chicken Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order\nItems subtotal\n3M + $2.00\nReview your pickup order\nYour order\n1 Chicken Bowl",
+      "evidenceImageCount": 2,
+      "evidenceTexts": [
+        "Your pickup order\nItems subtotal\n3M + $2.00",
+        "Review your pickup order\nYour order\n1 Chicken Bowl"
+      ],
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Chicken Bowl"
+            }
+          ],
+          "mealSwipes": 3,
+          "estimatedDiningDollarsCents": 200
+        }
+      }
+    },
+    {
+      "id": "multi-image-checkout-amount-not-carried-by-cart-marker-from-another-image",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Chicken Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Your pickup order\nItems subtotal\nContinue to checkout\nReview your pickup order\nYour order\n1 Chicken Bowl\n3M + $2.00",
+      "evidenceImageCount": 2,
+      "evidenceTexts": [
+        "Your pickup order\nItems subtotal\nContinue to checkout",
+        "Review your pickup order\nYour order\n1 Chicken Bowl\n3M + $2.00"
+      ],
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "meal-exchange",
+          "mealItems": [
+            {
+              "name": "1 Chicken Bowl"
+            }
+          ],
+          "mealSwipes": 3
+        }
+      }
+    },
+    {
+      "id": "conflict-omits-path-and-branch-dependent-values-keeps-location",
+      "raw": {
+        "visibleVenueText": "Jasper Kane Cafe",
+        "foodItems": [
+          {
+            "name": "Chicken Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 3
+      },
+      "evidenceText": "Review your pickup order\nYour order\n1 Chicken Bowl\nJasper Kane Cafe\n3M + $2.00\nYour payment\nPayment method\nDining Dollars",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "selectedDiningSpot": {
+            "name": "Jasper Kane Cafe",
+            "address": "BROOKLYN, Rogers Hall"
+          }
+        }
+      }
+    },
+    {
+      "id": "one-meal-plus-dining-dollars-proposes-no-path",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Chicken Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 1
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\n1 Meal + Dining Dollars",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "1 Chicken Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "multi-image-conflict-omits-path-and-items",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Chicken Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": 1
+      },
+      "evidenceText": "Review your pickup order\nYour payment\nPayment method\nDining Dollars\nYour Pickup Order\nContinue to Checkout\nBowl 1M",
+      "evidenceImageCount": 2,
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars",
+        "Your Pickup Order\nContinue to Checkout\nBowl 1M"
+      ],
+      "expected": {
+        "ok": true,
+        "proposal": {}
+      }
+    },
+    {
+      "id": "multi-image-dining-row-plus-other-method-proposes-no-path-keeps-items",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [
+          {
+            "name": "Chicken Bowl",
+            "quantity": 1,
+            "modifiers": []
+          }
+        ],
+        "mealSwipes": null
+      },
+      "evidenceText": "Review your pickup order\nYour payment\nPayment method\nDining Dollars\nReview your pickup order\nYour payment\nPayment method\nVisa ending 1234",
+      "evidenceImageCount": 2,
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars",
+        "Review your pickup order\nYour payment\nPayment method\nVisa ending 1234"
+      ],
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "mealItems": [
+            {
+              "name": "1 Chicken Bowl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "provider-menuPath-rejected-even-with-valid-dining-evidence",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null,
+        "menuPath": "dining-dollars"
+      },
+      "evidenceText": "Review your pickup order\nYour payment\nPayment method\nDining Dollars",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "forbidden_fields"
+      }
+    },
+    {
+      "id": "provider-menuPath-rejected-even-with-valid-meal-evidence",
+      "raw": {
+        "visibleVenueText": null,
+        "foodItems": [],
+        "mealSwipes": null,
+        "menuPath": "meal-exchange"
+      },
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nBowl 1M",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": false,
+        "reason": "forbidden_fields"
+      }
+    },
+    {
+      "id": "crave-current-dollar-cart-labeled-total",
+      "raw": {"visibleVenueText": null, "foodItems": [], "mealSwipes": null},
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nCrave NYU\n1 Bowl $12.00\nSubtotal $12.00\nTax $1.06\nTotal $13.06",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {
+          "menuPath": "dining-dollars",
+          "diningDollarsOrderTotalCents": 1306,
+          "selectedDiningSpot": {
+            "name": "Crave NYU",
+            "address": "John A. Paulson Center, 6th Floor"
+          }
+        }
+      }
+    },
+    {
+      "id": "starbucks-current-dollar-cart-labeled-total",
+      "raw": {"visibleVenueText": null, "foodItems": [], "mealSwipes": null},
+      "evidenceText": "Your Pickup Order\nContinue to Checkout\nStarbucks\n1 Latte $6.00\nSubtotal $6.00\nTotal $6.50",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {"menuPath": "dining-dollars", "diningDollarsOrderTotalCents": 650}
+      }
+    },
+    {
+      "id": "dunkin-review-payment-method-and-total",
+      "raw": {"visibleVenueText": null, "foodItems": [], "mealSwipes": null},
+      "evidenceText": "Review your pickup order\nYour order\n1 Coffee\nSubtotal $4.00\nTotal $4.30\nYour payment\nPayment method: Dining Dollars",
+      "evidenceImageCount": 1,
+      "expected": {
+        "ok": true,
+        "proposal": {"menuPath": "dining-dollars", "diningDollarsOrderTotalCents": 430}
+      }
+    },
+    {
+      "id": "dining-review-subtotal-without-total-has-no-amount",
+      "raw": {"visibleVenueText": null, "foodItems": [], "mealSwipes": null},
+      "evidenceText": "Review your pickup order\nYour order\n1 Coffee\nSubtotal $4.00\nYour payment\nPayment method: Dining Dollars",
+      "evidenceImageCount": 1,
+      "expected": {"ok": true, "proposal": {"menuPath": "dining-dollars"}}
+    },
+    {
+      "id": "dining-review-tax-fee-promo-without-total-has-no-amount",
+      "raw": {"visibleVenueText": null, "foodItems": [], "mealSwipes": null},
+      "evidenceText": "Review your pickup order\nYour order\n1 Coffee\nTax $0.30\nDelivery fee $1.00\nPromo -$2.00\nYour payment\nPayment method: Dining Dollars",
+      "evidenceImageCount": 1,
+      "expected": {"ok": true, "proposal": {"menuPath": "dining-dollars"}}
+    },
+    {
+      "id": "dining-review-conflicting-final-totals-has-no-amount",
+      "raw": {"visibleVenueText": null, "foodItems": [], "mealSwipes": null},
+      "evidenceText": "Review your pickup order\nYour order\n1 Coffee\nTotal $4.30\nTotal $5.30\nYour payment\nPayment method: Dining Dollars",
+      "evidenceImageCount": 1,
+      "expected": {"ok": true, "proposal": {"menuPath": "dining-dollars"}}
+    },
+    {
+      "id": "dining-review-visa-account-digits-after-selected-row-withheld",
+      "raw": {"visibleVenueText": null, "foodItems": [], "mealSwipes": null},
+      "evidenceText": "Review your pickup order\nYour order\n1 Coffee\nTotal $4.30\nYour payment\nPayment method\nDining Dollars\nVisa1234",
+      "evidenceImageCount": 1,
+      "expected": {"ok": true, "proposal": {}}
+    }
+  ],
+  "menuPath": [
+    { "id": "one-inert-dd", "evidenceTexts": ["Review your pickup order\nYour payment\nPayment method\nPayment detail\nDining Dollars"], "expected": { "menuPath": "dining-dollars", "conflict": false } },
+    { "id": "one-inert-me", "evidenceTexts": ["Review your pickup order\nYour payment\nPayment method\nPayment detail\nUse 1 Meal + Dining Dollars"], "expected": { "menuPath": "meal-exchange", "conflict": false } },
+    { "id": "one-inert-dd-promo-elsewhere", "evidenceTexts": ["Review your delivery order\nYour payment\nApply a promo code\nPayment method\nPayment detail\nDining Dollars\nApply a promo code ›"], "expected": { "menuPath": "dining-dollars", "conflict": false } },
+    { "id": "two-inert-dd-withheld", "evidenceTexts": ["Review your pickup order\nYour payment\nPayment method\nDetail A\nDetail B\nDining Dollars"], "expected": { "menuPath": null, "conflict": false } },
+    { "id": "two-inert-me-withheld", "evidenceTexts": ["Review your pickup order\nYour payment\nPayment method\nDetail A\nDetail B\nUse 1 Meal + Dining Dollars"], "expected": { "menuPath": null, "conflict": false } },
+    { "id": "one-inert-boundary-withheld", "evidenceTexts": ["Review your pickup order\nYour order\n1 Bowl\nYour payment\nPayment method\nPayment detail\nReceipt\nDining Dollars"], "expected": { "menuPath": null, "conflict": false } },
+    { "id": "one-inert-duplicate-row-withheld", "evidenceTexts": ["Review your pickup order\nYour order\n1 Bowl\nYour payment\nPayment method\nPayment detail\nDining Dollars\nPayment method"], "expected": { "menuPath": null, "conflict": false } },
+    { "id": "one-inert-conflicting-tender-withheld", "evidenceTexts": ["Review your pickup order\nYour payment\nPayment method\nPayment detail\nDining Dollars\nVisa ending 1234"], "expected": { "menuPath": null, "conflict": false } },
+    { "id": "one-inert-duplicate-tender-withheld", "evidenceTexts": ["Review your pickup order\nYour payment\nPayment method\nPayment detail\nDining Dollars\nDining Dollars"], "expected": { "menuPath": null, "conflict": false } },
+    { "id": "one-inert-only-withheld", "evidenceTexts": ["Review your pickup order\nYour payment\nPayment method\nPayment detail"], "expected": { "menuPath": null, "conflict": false } },
+    { "id": "one-inert-boundary-only-withheld", "evidenceTexts": ["Review your pickup order\nYour order\n1 Bowl\nYour payment\nPayment method\nPayment detail\nReceipt"], "expected": { "menuPath": null, "conflict": false } },
+    { "id": "one-inert-generic-review-withheld", "evidenceTexts": ["Review your order\nYour payment\nPayment method\nPayment detail\nDining Dollars"], "expected": { "menuPath": null, "conflict": false } },
+    { "id": "one-inert-historical-dd-withheld", "evidenceTexts": ["View order\nOrder information\nYour payment\nPayment method\nPayment detail\nDining Dollars"], "expected": { "menuPath": null, "conflict": false } },
+    {
+      "id": "meal-explicit-wording-title",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nCrave NYU - Meal Exchange"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-explicit-wording-historical",
+      "evidenceTexts": [
+        "View order\nOrder information\n2 x Chicken Bowl\nDunkin' at U-Hall - Meal Exchange"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-explicit-wording-case-and-line-wrap",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nMEAL\nEXCHANGE"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-wording-inside-longer-word",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nmeal exchanges"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-notation-1M",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nBowl 1M"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-notation-2M",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nTotal 2M"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-notation-3M",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nTotal 3M"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-notation-4M",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nTotal 4M"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-notation-5M",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nTotal 5M"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-notation-repeated-1M",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nBowl 1M\nWrap 1M"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-notation-overlap-same-total",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nTotal 3M\nBowl 1M\nTotal 3M"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-notation-6M-out-of-range",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\n6M"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-notation-0M-out-of-range",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\n0M"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-notation-conflicting-totals",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nTotal 2M\nTotal 3M"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-notation-decimal-guard",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\n1.3M"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-notation-with-conflicting-totals-but-explicit-wording",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nCrave NYU - Meal Exchange\nTotal 2M\nTotal 3M"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-mixed-resource-notation",
+      "evidenceTexts": [
+        "Your pickup order\n3M + $2.00"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-one-meal-plus-dining-dollars-is-not-evidence",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\n1 Meal + Dining Dollars"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-bare-meal-wording-is-not-evidence",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nMeal swipe bowl meal"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "meal-venue-and-plausibility-is-not-evidence",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nJasper Kane Cafe\nChicken Bowl\nSubtotal 12.00"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-row-two-line",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars"
+      ],
+      "expected": {
+        "menuPath": "dining-dollars",
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-row-inline",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method Dining Dollars"
+      ],
+      "expected": {
+        "menuPath": "dining-dollars",
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-row-inline-colon",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method: Dining Dollars"
+      ],
+      "expected": {
+        "menuPath": "dining-dollars",
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-row-value-line-chevron",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars >"
+      ],
+      "expected": {
+        "menuPath": "dining-dollars",
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-row-inline-single-angle-chevron",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method Dining Dollars ›"
+      ],
+      "expected": {
+        "menuPath": "dining-dollars",
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-row-delivery-with-your-order-section",
+      "evidenceTexts": [
+        "Review your delivery order\nYour order\n1 Chicken Bowl\nYour payment\nPayment method\nDining Dollars"
+      ],
+      "expected": {
+        "menuPath": "dining-dollars",
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-row-case-and-spacing-normalized",
+      "evidenceTexts": [
+        "Review your pickup order\nYOUR  PAYMENT\nPAYMENT   METHOD\ndining dollars"
+      ],
+      "expected": {
+        "menuPath": "dining-dollars",
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-same-signal-in-cart-category-has-no-authority",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nYour payment\nPayment method\nDining Dollars"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-same-signal-in-historical-category-has-no-authority",
+      "evidenceTexts": [
+        "View order\nOrder information\n2 x Chicken Bowl\nYour payment\nPayment method\nDining Dollars"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-other-selected-method",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nVisa ending 1234"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-selected-row-followed-by-visa-account-digits",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars\nVisa1234"
+      ],
+      "expected": {"menuPath": null, "conflict": false}
+    },
+    {
+      "id": "dining-incidental-text-with-other-method",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nDining Dollars discount -$2.00\nYour payment\nPayment method\nCredit card"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-incidental-text-no-payment-row",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nDining Dollars applied -$2.00"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-alternative-tender-list-without-your-payment",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nPayment method\nDining Dollars\nCredit card"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-row-later-under-your-payment",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nSubtotal 12.00\nPayment method\nDining Dollars"
+      ],
+      "expected": {
+        "menuPath": "dining-dollars",
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-canonical-review-split-known-labels",
+      "evidenceTexts": [
+        "Review your\npickup order\nYour\npayment\nSubtotal 12.00\nPayment\nmethod\nDining Dollars"
+      ],
+      "expected": { "menuPath": "dining-dollars", "conflict": false }
+    },
+    {
+      "id": "dining-cart-chrome-with-split-review-markers",
+      "evidenceTexts": [
+        "Your pickup order\nContinue to checkout\nReview your\npickup order\nYour payment\nPayment\nmethod Dining Dollars"
+      ],
+      "expected": { "menuPath": "dining-dollars", "conflict": false }
+    },
+    {
+      "id": "dining-later-row-with-other-tender-in-section",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nVisa ending 1234\nSubtotal 12.00\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-place-order-action-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nPlace your pickup order\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-multiple-payment-method-rows",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars\nPayment method\nCredit card"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-two-identical-rows-fail-closed",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars\nPayment method\nDining Dollars"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-two-your-payment-headings-fail-closed",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars\nYour payment"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-row-after-receipt-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nReceipt\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-order-confirmation-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nOrder confirmation\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-recognized-order-information-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nOrder information\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-unrecognized-lines-stays-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nApply a promo code\nSubtotal 12.00\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": "dining-dollars", "conflict": false }
+    },
+    {
+      "id": "dining-row-with-promo-control-before-and-after",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nApply a promo code\nPayment method\nDining Dollars\nApply a promo code"
+      ],
+      "expected": { "menuPath": "dining-dollars", "conflict": false }
+    },
+    {
+      "id": "dining-two-payment-sections-each-with-row-fail-closed",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars\nYour payment\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-bare-payment-method-without-selected-value",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nPayment method"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-generic-review-your-order-heading-not-authorized",
+      "evidenceTexts": [
+        "Review your order\nYour payment\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-real-layout-review-payment-then-order",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars\nApply a promo code\nYour order\n1 Coffee\nTotal $4.30"
+      ],
+      "expected": { "menuPath": "dining-dollars", "conflict": false }
+    },
+    {
+      "id": "dining-row-after-decorated-receipt-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nReceipt ›\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-decorated-order-confirmation-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nOrder confirmation: 123\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-decorated-place-order-cta-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nPlace your pickup order ›\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-priced-place-order-cta-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nPlace your pickup order $4.30\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-order-history-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nOrder history\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-past-orders-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nPast orders\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-decorated-order-information-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nOrder information ›\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-decorated-view-order-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nView order ›\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-decorated-delivery-heading-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nReview your delivery order ›\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-row-after-decorated-your-order-not-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nYour order ›\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-decorated-duplicate-your-payment-fails-closed",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars\nYour payment ›"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-decorated-your-payment-heading-only-opens-nothing",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment ›\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-long-unrelated-content-keeps-row-attributable",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nDetail 0\nDetail 1\nDetail 2\nDetail 3\nDetail 4\nDetail 5\nDetail 6\nDetail 7\nDetail 8\nDetail 9\nDetail 10\nDetail 11\nDetail 12\nDetail 13\nDetail 14\nDetail 15\nDetail 16\nDetail 17\nDetail 18\nDetail 19\nDetail 20\nDetail 21\nDetail 22\nDetail 23\nDetail 24\nDetail 25\nDetail 26\nDetail 27\nDetail 28\nDetail 29\nDetail 30\nDetail 31\nDetail 32\nDetail 33\nDetail 34\nDetail 35\nDetail 36\nDetail 37\nDetail 38\nDetail 39\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": "dining-dollars", "conflict": false }
+    },
+    {
+      "id": "dining-undecorated-lookalike-is-not-a-departure",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nReceipts\nReceipt of purchase\nPayment method\nDining Dollars"
+      ],
+      "expected": { "menuPath": "dining-dollars", "conflict": false }
+    },
+    {
+      "id": "dining-promo-control-after-row-with-decorated-place-order-after",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars\nApply a promo code ›\nYour order\n1 Coffee\nTotal $4.30\nPlace your pickup order ›"
+      ],
+      "expected": { "menuPath": "dining-dollars", "conflict": false }
+    },
+    {
+      "id": "meal-review-with-meal-exchange-identity-and-meal-payment",
+      "evidenceTexts": [
+        "Review your pickup order\nDunkin' at U-Hall - Meal Exchange\nYour payment\nPayment method\nUse 1 Meal + Dining Dollars\nYour order\n1 Coffee\nTotal 1M"
+      ],
+      "expected": { "menuPath": "meal-exchange", "conflict": false }
+    },
+    {
+      "id": "meal-review-inline-meal-payment-never-dining-dollars",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method Use 1 Meal + Dining Dollars\nYour order\n1 Coffee"
+      ],
+      "expected": { "menuPath": "meal-exchange", "conflict": false }
+    },
+    {
+      "id": "meal-review-split-pickup-heading-with-meal-payment",
+      "evidenceTexts": [
+        "Review your\npickup order\nYour payment\nPayment method\nUse 1 Meal + Dining Dollars"
+      ],
+      "expected": { "menuPath": "meal-exchange", "conflict": false }
+    },
+    {
+      "id": "dining-cart-subtotal-and-tax-without-labeled-total",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nStarbucks\n1 Latte $5.00\nSubtotal $5.00\nTax $0.44"
+      ],
+      "expected": { "menuPath": null, "conflict": false }
+    },
+    {
+      "id": "dining-value-missing",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nYour payment\nPayment method"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-value-has-extra-words",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars and Visa"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-prices-and-totals-only",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nSubtotal $12.00\nTotal $13.06"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dining-never-from-missing-meal-notation",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\nJasper Kane Cafe"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "conflict-dining-row-with-mixed-resource-notation",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl\n3M + $2.00\nYour payment\nPayment method\nDining Dollars"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": true
+      }
+    },
+    {
+      "id": "conflict-dining-row-with-explicit-wording",
+      "evidenceTexts": [
+        "Review your pickup order\nCrave NYU - Meal Exchange\nYour payment\nPayment method\nDining Dollars"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": true
+      }
+    },
+    {
+      "id": "conflict-dining-row-with-1M-notation",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Chicken Bowl 1M\nYour payment\nPayment method\nDining Dollars"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": true
+      }
+    },
+    {
+      "id": "conflict-across-images",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars",
+        "Your Pickup Order\nContinue to Checkout\nBowl 1M"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": true
+      }
+    },
+    {
+      "id": "multi-image-both-dining-rows",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars",
+        "Review your delivery order\nYour order\n1 Chicken Bowl\nYour payment\nPayment method\nDining Dollars"
+      ],
+      "expected": {
+        "menuPath": "dining-dollars",
+        "conflict": false
+      }
+    },
+    {
+      "id": "multi-image-dining-row-plus-other-method-fails-closed",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars",
+        "Review your pickup order\nYour payment\nPayment method\nVisa ending 1234"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "multi-image-meal-evidence-and-ineligible-dining-text",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nBowl 1M",
+        "Menu browse popular items reviews rating\nYour payment\nPayment method\nDining Dollars"
+      ],
+      "expected": {
+        "menuPath": "meal-exchange",
+        "conflict": false
+      }
+    },
+    {
+      "id": "multi-image-ineligible-dining-text-only",
+      "evidenceTexts": [
+        "Menu browse popular items reviews rating\nYour payment\nPayment method\nDining Dollars"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "multi-image-no-evidence-either-image",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nJasper Kane Cafe",
+        "Your Pickup Order\nContinue to Checkout\nCafe 370"
+      ],
+      "expected": {
+        "menuPath": null,
+        "conflict": false
+      }
+    },
+    {
+      "id": "dunkin-current-dollar-cart-total",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nDunkin' at U-Hall\n1 Coffee $4.00\nTotal $4.30"
+      ],
+      "expected": {"menuPath": "dining-dollars", "conflict": false}
+    },
+    {
+      "id": "dollar-item-price-without-total-withheld",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nDunkin' at U-Hall\n1 Coffee $4.00"
+      ],
+      "expected": {"menuPath": null, "conflict": false}
+    },
+    {
+      "id": "crave-meal-exchange-cart-identity-and-m",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nCrave NYU - Meal Exchange\nTotal 2M"
+      ],
+      "expected": {"menuPath": "meal-exchange", "conflict": false}
+    },
+    {
+      "id": "dunkin-meal-exchange-cart-identity-and-m",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nDunkin' at U-Hall - Meal Exchange\nTotal 1M"
+      ],
+      "expected": {"menuPath": "meal-exchange", "conflict": false}
+    },
+    {
+      "id": "dunkin-meal-based-review-payment",
+      "evidenceTexts": [
+        "Review your pickup order\nYour order\n1 Coffee\nYour payment\nPayment method\nUse 1 Meal + Dining Dollars"
+      ],
+      "expected": {"menuPath": "meal-exchange", "conflict": false}
+    },
+    {
+      "id": "conflict-dollar-cart-and-meal-exchange-image",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nTotal $13.06",
+        "Your Pickup Order\nContinue to Checkout\nCrave NYU - Meal Exchange\nTotal 1M"
+      ],
+      "expected": {"menuPath": null, "conflict": true}
+    },
+    {
+      "id": "dollar-cart-total-plus-out-of-range-6m-in-second-image",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nTotal $13.06",
+        "Your Pickup Order\nContinue to Checkout\nTotal 6M"
+      ],
+      "expected": {"menuPath": null, "conflict": false}
+    },
+    {
+      "id": "dollar-cart-total-plus-out-of-range-0m-in-second-image",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nTotal $13.06",
+        "Your Pickup Order\nContinue to Checkout\nTotal 0M"
+      ],
+      "expected": {"menuPath": null, "conflict": false}
+    },
+    {
+      "id": "dollar-cart-total-plus-conflicting-m-totals-in-second-image",
+      "evidenceTexts": [
+        "Your Pickup Order\nContinue to Checkout\nTotal $13.06",
+        "Your Pickup Order\nContinue to Checkout\nTotal 2M\nTotal 3M"
+      ],
+      "expected": {"menuPath": null, "conflict": false}
+    },
+    {
+      "id": "one-inert-mixed-payment-line-fails-closed",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nDining Dollars and Visa\nDining Dollars"
+      ],
+      "expected": {"menuPath": null, "conflict": false}
+    },
+    {
+      "id": "one-inert-generic-review-boundary-fails-closed",
+      "evidenceTexts": [
+        "Review your pickup order\nYour payment\nPayment method\nReview your order\nDining Dollars"
+      ],
+      "expected": {"menuPath": null, "conflict": false}
+    }
+  ]
+}

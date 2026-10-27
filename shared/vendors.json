@@ -1,0 +1,12 @@
+[
+  { "name": "Crave NYU", "address": "John A. Paulson Center, 6th Floor" },
+  { "name": "Dunkin' at U-Hall", "address": "U-Hall, 108 E 14th St" },
+  { "name": "Jasper Kane Cafe", "address": "BROOKLYN, Rogers Hall" },
+  { "name": "Peet's Coffee at Kimmel", "address": "Kimmel Center, 60 Washington Sq S, 2nd Floor" },
+  { "name": "Cafe 370", "address": "BROOKLYN - 370 Jay St" },
+  { "name": "Flavor Lab by NYU Eats", "address": "Jasper Kane Cafe" },
+  { "name": "Cafe 181", "address": "John A. Paulson Center, 6th Floor" },
+  { "name": "Upstein - Vedge Craft & Smoothie Lab", "address": "Weinstein Hall, 5 University Pl #11" },
+  { "name": "Upstein - Shareables, Cluckstein, Slidestein & Taqueria", "address": "Weinstein Hall, 5 University Pl #11" },
+  { "name": "True Burger at UHall", "address": "U-Hall, 110 E. 14th" }
+]

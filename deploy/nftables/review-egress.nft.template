@@ -1,0 +1,19 @@
+# Replace REVIEW_UID with the dedicated numeric UID; empty sets deny all DB access.
+# Populate only approved Atlas node IPs and pin their TLS names in /etc/hosts.
+add table inet commonplate_review
+flush table inet commonplate_review
+table inet commonplate_review {
+    set atlas4 {
+        type ipv4_addr
+    }
+    set atlas6 {
+        type ipv6_addr
+    }
+    chain output {
+        type filter hook output priority 0; policy accept;
+        meta skuid ${REVIEW_UID} ct state established,related accept
+        meta skuid ${REVIEW_UID} ip daddr @atlas4 tcp dport 27017 accept
+        meta skuid ${REVIEW_UID} ip6 daddr @atlas6 tcp dport 27017 accept
+        meta skuid ${REVIEW_UID} reject
+    }
+}

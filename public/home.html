@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CommonPlate @ NYU</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <h1 class="brand-text">Common<span class="brand-accent">Plate</span> <span class="brand-sub brand-purple">@ NYU</span></h1>
+  </header>
+
+  <main class="container">
+    <section class="hero meal-alerts-hero">
+      <div class="meal-alerts-inner">
+        <h2 class="meal-alerts-title">Need food? Have extra swipes?</h2>
+        <p class="meal-alerts-desc">A safe way to share meal swipes and find food on campus. <a href="#how-it-works" class="how-link">How it works →</a></p>
+        <div class="cta-buttons meal-alerts-cta">
+          <a href="/request/new" class="btn btn-primary meal-alerts-btn">Request Food</a>
+          <button id="subscribe-cta-btn" class="btn btn-primary subscribe-btn meal-alerts-btn">Get Meal Request Alerts</button>
+        </div>
+
+        <!-- Replaces the alerts control while public actions are paused.
+             Copy and visibility are owned by src/client/home.ts. -->
+        <p id="alerts-unavailable" class="subscribe-helper" role="status" hidden></p>
+        <div class="subscriber-count-hero" style="margin-top:1.5rem; text-align:center;">
+          <span id="active-subscriber-hero" style="font-size:1.1rem; color:#6b6b6b; background:#f6f2ff; border-radius:8px; padding:0.5em 1em; display:inline-block;">Loading volunteer count...</span>
+        </div>
+        <div id="subscribe-panel" class="subscribe-panel meal-alerts-subscribe card" style="display:none;">
+          <form id="subscribe-form" autocomplete="off" novalidate>
+            <div class="subscribe-form-group">
+              <label for="subscribe-email" class="subscribe-label">Email</label>
+              <input type="email" id="subscribe-email" name="email" class="subscribe-input" required autocomplete="email" placeholder="you@nyu.edu" />
+            </div>
+            <div class="subscribe-helper">We’ll email you sometimes when new meal swipe requests are posted (max ~4/day). You can unsubscribe anytime.</div>
+            <div class="subscribe-actions">
+              <button type="submit" class="btn btn-primary subscribe-submit">Subscribe</button>
+              <button type="button" id="subscribe-cancel" class="subscribe-cancel" tabindex="0">Cancel</button>
+            </div>
+            <div id="subscribe-message" class="subscribe-message" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="requests-section">
+      <div class="section-header">
+        <h3>Active Meal Requests</h3>
+        <div class="activity-stats">
+          <span class="stat-item stat-active" id="active-count">—</span>
+          <span class="stat-divider">·</span>
+          <span class="stat-item stat-secondary" id="total-shared">— total meals shared</span>
+        </div>
+      </div>
+      <div id="requests-list" class="requests-grid">
+        <p class="loading">Loading requests...</p>
+      </div>
+    </section>
+
+  </main>
+
+  <section id="how-it-works" class="how-it-works">
+    <div class="container">
+      <h3>How It Works</h3>
+      <div class="how-columns">
+        <div class="how-column">
+          <h4>For Requesters</h4>
+          <ol>
+            <li>Fill out the request form with vendor, food, time window, and email</li>
+            <li>CommonPlate attempts to send a confirmation email; delivery is not guaranteed</li>
+            <li>Another student places your order on GrubHub using their meal swipes</li>
+            <li>When someone helps, CommonPlate attempts to email the pickup details; delivery is not guaranteed</li>
+            <li>Pick up your food!</li>
+          </ol>
+        </div>
+        <div class="how-column">
+          <h4>For Givers</h4>
+          <ol>
+            <li>Browse active meal requests on the homepage</li>
+            <li>Click a request to see full details</li>
+            <li>Place the order using your meal swipes on GrubHub</li>
+            <li>Enter the order number and estimated pickup time</li>
+            <li>CommonPlate attempts to email the requester the order details</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>CommonPlate @ NYU · Built with care for our community</p>
+    <div class="footer-links">
+      <p class="privacy-note">The helper’s email may be sent to the requester for coordination. Placed Request data is retained for seven days; Fulfillment records may be retained longer.</p>
+  <p class="resources-link"><a href="https://www.nyu.edu/students/student-information-and-resources/courtesy-meals.html" target="_blank" rel="noopener" class="footer-link">Other NYU Food Resources</a></p>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/home.js"></script>
+</body>
+</html>

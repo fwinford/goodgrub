@@ -1,0 +1,15 @@
+[Unit]
+Description=GoodGrub review UID outbound containment
+Before=commonplate-review.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/nft -f /etc/commonplate-review/egress.nft
+RemainAfterExit=yes
+# Never flush these rules on stop: review must remain contained.
+NoNewPrivileges=yes
+ProtectHome=yes
+ProtectSystem=strict
+
+[Install]
+WantedBy=multi-user.target

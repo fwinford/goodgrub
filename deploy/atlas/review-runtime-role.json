@@ -1,0 +1,34 @@
+{
+  "roleName": "commonplateReviewRuntime",
+  "actions": [
+    {
+      "action": "FIND",
+      "resources": [{ "db": "commonplate_review", "collection": "" }]
+    },
+    {
+      "action": "INSERT",
+      "resources": [{ "db": "commonplate_review", "collection": "" }]
+    },
+    {
+      "action": "UPDATE",
+      "resources": [{ "db": "commonplate_review", "collection": "" }]
+    },
+    {
+      "action": "REMOVE",
+      "resources": [{ "db": "commonplate_review", "collection": "" }]
+    },
+    {
+      "action": "CREATE_COLLECTION",
+      "resources": [{ "db": "commonplate_review", "collection": "" }]
+    },
+    {
+      "action": "CREATE_INDEX",
+      "resources": [{ "db": "commonplate_review", "collection": "" }]
+    },
+    {
+      "action": "LIST_INDEXES",
+      "resources": [{ "db": "commonplate_review", "collection": "" }]
+    }
+  ],
+  "inheritedRoles": []
+}

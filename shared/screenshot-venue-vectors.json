@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "vectors": [
+    {"id": "supported-v1", "evidenceTexts": ["Jasper Kane Cafe - Meal Exchange"], "expected": {"kind": "supported", "vendor": "Jasper Kane Cafe", "hasV1Observation": true}},
+    {"id": "supported-split-v1", "evidenceTexts": ["Crave NYU - Meal\nExchange"], "expected": {"kind": "supported", "vendor": "Crave NYU", "hasV1Observation": true}},
+    {"id": "unsupported-v1", "evidenceTexts": ["Synthetic Garden - Meal Exchange"], "expected": {"kind": "unsupported", "key": "syntheticgarden", "hasV1Observation": true}},
+    {"id": "three-ascii-letters-with-digits-can-be-v1", "evidenceTexts": ["A1B2C3 - Meal Exchange"], "expected": {"kind": "unsupported", "key": "a1b2c3", "hasV1Observation": true}},
+    {"id": "digit-heavy-v1-is-indeterminate", "evidenceTexts": ["12345678 - Meal Exchange"], "expected": {"kind": "unresolved", "hasV1Observation": true}},
+    {"id": "unsupported-v1-with-catalog-mention-is-unresolved", "evidenceTexts": ["Synthetic Garden - Meal Exchange\nJasper Kane Cafe"], "expected": {"kind": "unresolved", "hasV1Observation": true}},
+    {"id": "supported-and-unsupported-conflict", "evidenceTexts": ["Jasper Kane Cafe - Meal Exchange", "Synthetic Garden - Meal Exchange"], "expected": {"kind": "conflicting", "hasV1Observation": true}},
+    {"id": "two-supported-conflict", "evidenceTexts": ["Jasper Kane Cafe - Meal Exchange", "Crave NYU - Meal Exchange"], "expected": {"kind": "conflicting", "hasV1Observation": true}},
+    {"id": "two-unsupported-conflict", "evidenceTexts": ["Synthetic Garden - Meal Exchange", "Imaginary Cafe - Meal Exchange"], "expected": {"kind": "conflicting", "hasV1Observation": true}},
+    {"id": "cart-position-is-not-v1", "evidenceTexts": ["Your pickup order\nSynthetic Garden\nAdd items"], "expected": {"kind": "unresolved", "hasV1Observation": false}},
+    {"id": "near-supported-ocr-is-unresolved", "evidenceTexts": ["Dunkin'at U-Hall - Meal Exchange"], "expected": {"kind": "unresolved", "hasV1Observation": true}},
+    {"id": "truncated-v1-is-unresolved", "evidenceTexts": ["Synthetic Gar... - Meal Exchange"], "expected": {"kind": "unresolved", "hasV1Observation": true}},
+    {"id": "ambiguous-base-is-unresolved", "evidenceTexts": ["Upstein - Meal Exchange"], "expected": {"kind": "unresolved", "hasV1Observation": true}},
+    {"id": "two-v1-lines-in-one-image-are-indeterminate", "evidenceTexts": ["Jasper Kane Cafe - Meal Exchange\nSynthetic Garden - Meal Exchange"], "expected": {"kind": "unresolved", "hasV1Observation": true}},
+    {"id": "indeterminate-does-not-veto-conflict", "evidenceTexts": ["Jasper Kane Cafe - Meal Exchange", "Synthetic Garden - Meal Exchange", "Upstein - Meal Exchange"], "expected": {"kind": "conflicting", "hasV1Observation": true}},
+    {"id": "dining-dollars-without-v1-has-no-observation", "evidenceTexts": ["Your Pickup Order\nContinue to Checkout\nJasper Kane Cafe"], "expected": {"kind": "unresolved", "hasV1Observation": false}},
+    {"id": "bare-meal-exchange-line-is-not-a-venue-observation", "evidenceTexts": ["Meal Exchange\nJasper Kane Cafe"], "expected": {"kind": "unresolved", "hasV1Observation": false}},
+    {"id": "supported-v1-with-indeterminate-image-is-unresolved", "evidenceTexts": ["Jasper Kane Cafe - Meal Exchange", "Synthetic Gar... - Meal Exchange"], "expected": {"kind": "unresolved", "hasV1Observation": true}},
+    {"id": "near-miss-v1-with-incidental-catalog-mention-is-unresolved", "evidenceTexts": ["Dunkin'at U-Hall - Meal Exchange\nJasper Kane Cafe"], "expected": {"kind": "unresolved", "hasV1Observation": true}},
+    {"id": "supported-v1-with-digit-heavy-indeterminate-image-is-unresolved", "evidenceTexts": ["Jasper Kane Cafe - Meal Exchange", "12345678 - Meal Exchange"], "expected": {"kind": "unresolved", "hasV1Observation": true}}
+  ]
+}

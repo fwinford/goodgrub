@@ -1,0 +1,72 @@
+{
+  "name": "commonplate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CommonPlate — a lightweight food request and fulfillment app for campus mutual aid.",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run",
+    "test:mongo": "node scripts/run-mongo-integration.mjs",
+    "migrate:request-ttl": "tsx scripts/migrate-request-ttl-index.ts",
+    "register:p2-identity-versions": "tsx scripts/register-participant-identity-versions.ts",
+    "migrate:p2-identity": "tsx scripts/migrate-participant-identity.ts",
+    "build:client": "node build-client.mjs",
+    "dev": "npm run build:client && tsx watch app.ts",
+    "build": "npm run build:client && tsc",
+    "start": "node dist/app.js",
+    "seed:ui": "tsx scripts/seed-ui-request.ts seed",
+    "seed:ui:cleanup": "tsx scripts/seed-ui-request.ts cleanup",
+    "seed:ui:owned": "tsx scripts/seed-ui-request.ts seed-owned",
+    "seed:ui:owned:cleanup": "tsx scripts/seed-ui-request.ts cleanup-owned",
+    "seed:ui:needs-help": "tsx scripts/seed-ui-request.ts seed-needs-help",
+    "seed:ui:needs-help:cleanup": "tsx scripts/seed-ui-request.ts cleanup-needs-help",
+    "qa:mail-sink": "tsx scripts/local-mail-sink.ts",
+    "qa:env": "tsx scripts/qa-environment.ts",
+    "probe:atlas-local": "tsx scripts/atlas-qualification-probe-local.ts",
+    "lint": "eslint --ext .js,.ts src",
+    "typecheck": "tsc -p tsconfig.typecheck.json",
+    "prune": "ts-prune",
+    "depcheck": "depcheck",
+    "ci-check": "npm run lint && npm run typecheck && npm run prune && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fwinford/goodgrub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/fwinford/goodgrub/issues"
+  },
+  "homepage": "https://github.com/fwinford/goodgrub#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^7.0.0",
+    "mongoose": "^8.19.3",
+    "node-cron": "^4.2.1",
+    "resend": "^6.4.2",
+    "ws": "^8.22.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/express-rate-limit": "^5.1.3",
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^24.10.0",
+    "@types/node-cron": "^3.0.11",
+    "@types/ws": "^8.18.2",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "depcheck": "^1.4.2",
+    "esbuild": "^0.26.0",
+    "eslint": "^8.48.0",
+    "ts-prune": "^0.8.3",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
+  }
+}

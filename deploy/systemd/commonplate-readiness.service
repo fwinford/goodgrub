@@ -1,0 +1,17 @@
+[Unit]
+Description=Check GoodGrub CommonPlate readiness
+After=commonplate.service
+
+[Service]
+Type=oneshot
+User=commonplate
+Group=commonplate
+ExecStart=/opt/commonplate/current/scripts/check-readiness-once.sh
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+LimitCORE=0
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=commonplate-readiness

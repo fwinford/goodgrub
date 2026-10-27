@@ -1,0 +1,47 @@
+[Unit]
+Description=GoodGrub CommonPlate production API
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=commonplate
+Group=commonplate
+WorkingDirectory=/opt/commonplate/current
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=3000
+Environment=BASE_URL=https://api.goodgrubapp.com
+Environment="FROM_EMAIL=GoodGrub <noreply@goodgrubapp.com>"
+Environment=PUBLIC_ACTIONS_PAUSED=true
+Environment=SCHEDULER_ENABLED=true
+Environment=CRON_ENABLED=true
+Environment=MONITOR_EMAILS=
+Environment=MONITOR_THRESHOLD=10
+LoadCredentialEncrypted=MONGO_URI:/etc/credstore.encrypted/commonplate-production/MONGO_URI
+LoadCredentialEncrypted=RESEND_API_KEY:/etc/credstore.encrypted/commonplate-production/RESEND_API_KEY
+LoadCredentialEncrypted=CLAIM_TOKEN_HMAC_SECRET:/etc/credstore.encrypted/commonplate-production/CLAIM_TOKEN_HMAC_SECRET
+ExecStart=/usr/bin/node /opt/commonplate/current/dist/src/credentialLauncher.js
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=30s
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+LimitCORE=0
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=commonplate
+
+[Install]
+WantedBy=multi-user.target

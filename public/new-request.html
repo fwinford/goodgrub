@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Request | CommonPlate</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <h1 class="brand-text">Common<span class="brand-accent">Plate</span> <span class="brand-sub brand-purple">@ NYU</span></h1>
+    <p><a href="/" class="back-link">← Back</a></p>
+  </header>
+
+  <main class="container">
+    <section class="form-section">
+      <h2>Request a Meal</h2>
+
+      <!-- Shown before any data entry whenever posting is not actionable
+           (currently always: the backend requires verified participant
+           identity, which the website cannot yet supply — Week 6). Copy and
+           visibility are owned by src/client/new-request.ts. -->
+      <div id="pause-notice" class="pause-message" role="status" hidden></div>
+
+      <p>We're here to help. Be sure to look at the meal exchange menu on Grubhub.</p>
+
+      <form id="request-form" class="meal-form">
+        <fieldset id="request-fields">
+        <div class="form-group">
+          <label for="vendor">Where do you want food from?</label>
+          <input type="text" id="vendor" name="vendor" required placeholder="e.g., Crave NYU, Upstein', Dunkin'">
+        </div>
+
+        <div class="form-group">
+          <label for="food">What do you want?</label>
+          <input type="text" id="food" name="food" required placeholder="Copy order details from Grubhub">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="email" required placeholder="abc123@nyu.edu">
+          <small>We use your email to coordinate updates about your request. Helpers never see it.</small>
+        </div>
+
+        <div class="form-group">
+          <label>When do you need it?</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="windowType" value="asap" checked>
+              <span>ASAP (available for the next 3 hours)</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="windowType" value="range">
+              <span>Specific time range</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="time-range-fields" class="form-group" style="display: none;">
+          <label for="windowStart">From</label>
+          <input type="datetime-local" id="windowStart" name="windowStart">
+
+          <label for="windowEnd">To</label>
+          <input type="datetime-local" id="windowEnd" name="windowEnd">
+        </div>
+
+
+        <div id="error-message" class="error-message" style="display: none;"></div>
+        <div id="success-message" class="success-message" style="display: none;"></div>
+
+        <button type="submit" class="btn btn-primary" id="submit-btn">Submit Request</button>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>CommonPlate @ NYU · Built with care for our community</p>
+    <p class="privacy-note">The helper’s email may be sent to the requester for coordination. Placed Request data is retained for seven days; Fulfillment records may be retained longer.</p>
+  </footer>
+
+  <script type="module" src="/js/new-request.js"></script>
+</body>
+</html>

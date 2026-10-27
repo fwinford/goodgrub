@@ -1,0 +1,305 @@
+
+/*
+==================================================
+  CommonPlate Main Stylesheet
+==================================================
+*/
+
+/* 0. Design Tokens / Variables */
+:root {
+  /* Colors */
+  --brand-purple: #8B5CF6;
+  --brand-dark: #2d2d2d;
+  --brand-light: #faf8f5;
+  --background: #faf8f5;
+  --surface: #fff;
+  --primary-text: #2d2d2d;
+  --muted-text: #6b6b6b;
+  --success: #15803d;
+  --warning: #ea3e00;
+  --error: #c53030;
+  --border: #e8e4dc;
+  --header-bg: #f5f2ed;
+  --shadow-sm: 0 2px 8px rgba(45,45,45,0.04);
+  --shadow-md: 0 4px 16px rgba(45,45,45,0.06);
+  --shadow-lg: 0 8px 24px rgba(45,45,45,0.08);
+
+  /* Typography */
+  --font-header: 'Cabin', -apple-system, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, system-ui, sans-serif;
+  --base-font-size: 16px;
+  --heading-1: 3rem;
+  --heading-2: 1.6rem;
+  --heading-3: 1.5rem;
+
+  /* Spacing & Radius */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+/* 1. Base / Reset */
+/* (See base.css for full reset and body styles) */
+
+/* 2. Layout */
+header {
+  background: var(--header-bg);
+  color: var(--primary-text);
+  padding: var(--space-lg) var(--space-lg);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+  font-size: var(--heading-1);
+  margin-bottom: 0;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-family: var(--font-header);
+}
+
+header p {
+  font-size: 0.95rem;
+  color: var(--muted-text);
+  margin-top: var(--space-sm);
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  header { padding: 1.75rem 2rem; }
+  header h1 { font-size: 3.25rem; }
+}
+
+footer {
+  background: var(--header-bg);
+  color: var(--primary-text);
+  text-align: center;
+  padding: 1.25rem var(--space-lg);
+  margin-top: var(--space-xl);
+  border-top: 1px solid var(--border);
+}
+
+footer p {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--muted-text);
+  margin-bottom: var(--space-sm);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+footer .privacy-note,
+footer .resources-link {
+  font-size: 0.85rem;
+  color: var(--primary-text);
+  margin: 0;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .footer-links {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--space-lg);
+  }
+}
+
+/* 3. Typography */
+.brand-text {
+  font-family: var(--font-header);
+  font-weight: 600;
+  color: var(--primary-text);
+}
+.brand-accent {
+  font-weight: 600;
+  color: var(--primary-text);
+}
+.brand-sub {
+  font-weight: 600;
+  opacity: 1;
+}
+.brand-purple {
+  color: var(--brand-purple);
+}
+
+/* 4. Buttons */
+/* (See components.css for .btn, .btn-primary, etc.) */
+
+/* 5. Hero / Homepage */
+.hero {
+  text-align: center;
+  padding: var(--space-lg) var(--space-lg);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  animation: fadeInUp 0.6s ease-out;
+}
+.hero h2 {
+  font-size: var(--heading-2);
+  line-height: 1.3;
+  margin-bottom: var(--space-sm);
+  color: var(--primary-text);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.hero p {
+  font-size: 0.95rem;
+  color: var(--muted-text);
+  margin: 0 auto var(--space-md);
+  max-width: 60ch;
+  font-weight: 500;
+}
+@media (min-width: 768px) {
+  .hero {
+    padding: 2rem 2.5rem;
+  }
+  .hero h2 {
+    font-size: 1.6rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+}
+
+/* 6. Cards (requests, fulfill, etc.) */
+/* (See components.css for .request-card, .event-card, etc.) */
+
+/* 7. Forms */
+/* (See components.css for .form-section, .form-group, etc.) */
+
+/* 8. Utilities / Helpers */
+.mt-sm { margin-top: var(--space-sm) !important; }
+.mb-md { margin-bottom: var(--space-md) !important; }
+.text-center { text-align: center !important; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+
+/* 9. Page Sections */
+section {
+  margin-bottom: var(--space-xl);
+}
+.requests-section {
+  margin-bottom: calc(var(--space-xl) + var(--space-md));
+}
+section h3 {
+  font-size: var(--heading-3);
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-text);
+  letter-spacing: -0.01em;
+}
+.requests-section h3 {
+  font-size: 1.65rem;
+  margin-bottom: 1.5rem;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+.section-header h3 {
+  margin-bottom: 0;
+}
+.activity-stats {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: center;
+}
+.stat-item {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted-text);
+  letter-spacing: 0.01em;
+}
+.stat-item strong {
+  font-weight: 700;
+  color: var(--muted-text);
+}
+.stat-divider {
+  color: var(--muted-text);
+  margin: 0 var(--space-xs);
+}
+.stat-active {
+  color: var(--brand-purple);
+  font-weight: 600;
+}
+.stat-secondary {
+  color: var(--muted-text);
+  font-weight: 500;
+}
+@media (min-width: 768px) {
+  section h3 {
+    font-size: 1.65rem;
+  }
+  .requests-section h3 {
+    font-size: 1.85rem;
+  }
+}
+
+/* 10. How It Works Section */
+.how-it-works {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-xl) 0;
+  margin-top: var(--space-xl);
+}
+.how-it-works h3 {
+  font-size: var(--heading-3);
+  color: var(--primary-text);
+  margin-bottom: var(--space-lg);
+  text-align: center;
+  font-weight: 600;
+}
+.how-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+.how-column h4 {
+  font-size: 1.1rem;
+  color: var(--brand-purple);
+  margin-bottom: var(--space-md);
+  font-weight: 600;
+}
+.how-column ol {
+  list-style: decimal;
+  padding-left: var(--space-lg);
+  color: var(--primary-text);
+}
+.how-column li {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+  color: var(--muted-text);
+}
+.how-note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted-text);
+  font-style: italic;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+}
+@media (min-width: 768px) {
+  .how-columns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+}

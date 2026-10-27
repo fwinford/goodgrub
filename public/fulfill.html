@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fulfill Request | CommonPlate</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header>
+    <h1 class="brand-text">Common<span class="brand-accent">Plate</span> <span class="brand-sub brand-purple">@ NYU</span></h1>
+    <p><a href="/" class="back-link">← Back</a></p>
+  </header>
+
+  <main class="container">
+    <section class="form-section">
+      <h2>Order Details</h2>
+
+      <!-- Request summary card (top) -->
+      <div id="request-summary" class="request-summary">
+        <div class="summary-food" id="summary-food">Loading...</div>
+        <div class="summary-vendor" id="summary-vendor"></div>
+        <div class="summary-food-details" id="summary-food-details"></div>
+        <div class="summary-window" id="summary-window"></div>
+      </div>
+
+      <div id="order-number-display" style="display:none; margin-bottom: 1rem;">
+        <h3 id="order-number-top">Order number: <span id="order-number-val"></span></h3>
+      </div>
+
+      <form id="fulfill-form" class="meal-form">
+        <div class="form-group">
+          <label for="orderNumber">Grubhub order number (required)</label>
+          <input type="text" id="orderNumber" name="orderNumber" required placeholder="e.g., ABC12345" />
+          <small class="help-text">After you place the Grubhub order, enter the order number from your confirmation screen or email.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="eta">ETA (optional)</label>
+          <input type="text" id="eta" name="eta" placeholder="10 min" />
+        </div>
+
+        <hr />
+        <h3>Optional: contact the requester</h3>
+        <div class="form-group">
+          <label for="fulfillerEmail">Your email (required)</label>
+          <input type="email" id="fulfillerEmail" name="fulfillerEmail" required placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Message to student (optional)</label>
+          <textarea id="contactMessage" name="contactMessage" rows="4" placeholder="Hi — I placed the order ..."></textarea>
+        </div>
+
+        <div id="error-message" class="error-message" style="display: none;"></div>
+        <div id="success-message" class="success-message" style="display: none;"></div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submit-btn">Place Order</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>CommonPlate @ NYU · Built with care for our community</p>
+  </footer>
+
+  <script type="module" src="/js/fulfill.js"></script>
+</body>
+</html>

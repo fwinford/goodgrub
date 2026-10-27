@@ -1,0 +1,28 @@
+node_modules
+.vscode
+.env
+.env.local
+.env.production
+.DS_Store
+dist
+release-artifacts
+*.map
+.npm
+.cache
+
+# Xcode / iOS
+DerivedData
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+*.xcscmblueprint
+
+# Docs are ignored by default — working notes, milestone specs, and reviews stay
+# local. The durable contracts below are the exception: they are committed
+# because source comments and onboarding cite them, so they must exist in a
+# fresh clone.
+docs/*
+!docs/system-contract.md
+!docs/testing.md
+!docs/decisions/
+!docs/decisions/**
